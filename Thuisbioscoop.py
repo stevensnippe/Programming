@@ -13,5 +13,4 @@ datum = time.strftime("%d-%m-%Y")
 sorteer = 0
 response = requests.get('http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='+key+'&dag='+datum+'&sorteer='+str(sorteer))
 print(response.text)
-
-#Master Branch version @ Github
+k
