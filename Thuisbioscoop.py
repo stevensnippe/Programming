@@ -75,3 +75,11 @@ print_filmnamen(films_dict)
 print("\n") #witregel voor overzicht
 code = generateCode()
 kaartjeKopen(code)
+
+#######TKinter start######
+window = tkinter.Tk()
+tk = tkinter
+label = tk.Label(window, text='Test')
+label.pack()
+
+window.mainloop()
