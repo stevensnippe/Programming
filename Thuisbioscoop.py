@@ -75,6 +75,4 @@ print_filmnamen(films_dict)
 print("\n") #witregel voor overzicht
 code = generateCode()
 kaartjeKopen(code)
-ddd
-rrrr
-dylantest
+
