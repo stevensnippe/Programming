@@ -76,5 +76,5 @@ print("\n") #witregel voor overzicht
 code = generateCode()
 kaartjeKopen(code)
 ddd
-
+rrrr
 
