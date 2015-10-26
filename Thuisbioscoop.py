@@ -86,10 +86,10 @@ def createLogin(nLg, nPw):
             continue
 
     if inUse == False:
-            if row[0] != 'naam':
-                writer.writerow( ('naam', 'wachtwoord') )
-                writer.writerow( (nLg, nPw) )
-            else:
+     #       if row[0] != 'naam': #!# schrijft alleen als naam en wachtwoord er al staan #!#
+      #          writer.writerow( ('naam', 'wachtwoord') )
+       #         writer.writerow( (nLg, nPw) )
+        #    else:
                 writer.writerow( (nLg, nPw) )
     f.close()
     r.close()
@@ -160,5 +160,5 @@ print("\n") #witregel voor overzicht
 code = generateCode()
 kaartjeKopen(code) #kan alleen uitvoeren als variablen boven zijn declared
 
-#login('steven','lol') #login komt uit tkinter
+#login('steven','lol') #variablen hiervoor komen uit tkinter
 createLogin('baksteen','lol') #login maken gebeurt in tkinter
