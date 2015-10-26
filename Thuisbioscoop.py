@@ -141,16 +141,20 @@ def codeInDb(code):
     """kijkt of de uuid4 in de database voorkomt"""
     r = open('database.csv', 'r')
     reader = csv.reader(r, delimiter = ',')
-    inDb = []
+    inDb = False
+
     for row in reader:
-        for colum in reader:
-            inDb.append(colum[0])
-    if code in inDb:
+       if code == (row[0]):
+           inDb = True
+           break
+       else:
+           inDb = False
+           continue
+    if inDb == True:
         print("De code komt voor in de database.")
-        return True
     else:
         print("De code komt niet voor in de database.")
-        return False
+    return inDb
 
 def clearFile(file): #naam van file bv clearFile('kluis.csv')
     """Maakt de csv file leeg"""
@@ -172,4 +176,5 @@ code = generateCode()
 kaartjeKopen(code) #kan alleen uitvoeren als variablen boven zijn declared
 
 #login('steven','lol') #variablen hiervoor komen uit tkinter
-createLogin('baksteen','lol') #login maken gebeurt in tkinter
+#createLogin('baksteen','lol') #login maken gebeurt in tkinter
+codeInDb('96df784b-606a-4ede-8eae-e1b0cdc3169b')
