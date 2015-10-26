@@ -74,6 +74,21 @@ def generateCode():
         print("TEST - unieke code code: "+code)
         return code
 
+def codeInDb(code):
+    """kijkt of de uuid4 in de database voorkomt"""
+    r = open('code.csv', 'r')
+    reader = csv.reader(r, delimiter = ',')
+    inDb = []
+    for row in reader:
+        for colum in reader:
+            inDb.append(colum[0])
+    if code in inDb:
+        print("De code komt voor in de database.")
+        return True
+    else:
+        print("De code komt niet voor in de database.")
+        return False
+
 def clearFile(file): #naam van file bv clearFile('kluis.csv')
     """Maakt de csv file leeg"""
     clear = open(file, 'w+')
