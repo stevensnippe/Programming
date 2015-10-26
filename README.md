@@ -7,3 +7,5 @@ commit dus altijd naar de master branch want daar werken we in.
 
 Bij gemaakte fouten kunnen oudere versies worden terug gevonden door
 naar de file te gaan en op history te klikken.
+
+Aub geen veranderingen aanbrengen in .idea en .gitignore om ellende te voorkomen.
