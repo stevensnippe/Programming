@@ -67,6 +67,12 @@ def clearFile(file): #naam van file bv clearFile('kluis.csv')
     clear.close()
     print("De inhoud van "+file+" is verwijdert.")
 
+def antwoord(text):
+    from tkinter.messagebox import showinfo
+    showinfo(title='popup', message='Hoi '+text)
+
+################# EINDE DEF FUNCTIES ###########
+
 
 #clearFile #maakt gekozen file leeg
 schrijf_xml(response)
@@ -79,7 +85,12 @@ kaartjeKopen(code)
 #######TKinter start######
 window = tkinter.Tk()
 tk = tkinter
-label = tk.Label(window, text='Test')
+label = tk.Label(window, text='Vul uw email adres in:')
 label.pack()
+naam = tk.Entry(window)
+naam.pack()
+button = tk.Button(window, text='Voer in',command=(lambda: antwoord(naam.get())))
+button.pack()
+
 
 window.mainloop()
