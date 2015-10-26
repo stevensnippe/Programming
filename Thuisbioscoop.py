@@ -7,7 +7,6 @@ import xmltodict
 import uuid     #genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420) - uuid.uuid4()
 import csv      #CSV bestand om unieke codes in op te slaan
 
-# ~---> master branch password is v1q <---~
 """
 Aan de parameter key geeft je de eigen unieke API sleutel mee.
 Aan de parameter datum geeft je de datum mee geschreven als: 25-10-2015. Je kunt alleen een request doen naar de TV-films voor vandaag en morgen.
@@ -26,13 +25,15 @@ def schrijf_xml(reponse):
     bestand.close()
 
 def verwerk_xml():
+    """Niet zeker van het nut van deze functie, laat staan later naar kijken"""
     bestand = open('films.xml', 'r')
     xml_string = bestand.read()
     bestand.close()
     return xmltodict.parse(xml_string)
 
-# na lang zoeken: http://www.stuffaboutcode.com/2012/06/python-encode-xml-escape-characters.html
+#Na lang zoeken: http://www.stuffaboutcode.com/2012/06/python-encode-xml-escape-characters.html
 def escapeXML(text):
+    """De string die je erin doet word gefilterd van de onderstaande tags"""
     text = text.replace("&amp;", "&")
     text = text.replace("&quot;", "\"")
     text = text.replace("&apos;", "'")
@@ -43,6 +44,9 @@ def escapeXML(text):
     return text
 
 def login(lg, pw):
+    """Extract de contents van login.csv naar een dictionary en 2 tuples,
+    dit is makkelijk voor het verder werken met de data - indien
+    meer tijd over herschrijven naar efficientere methode"""
     userLogins = {
 
     }
@@ -61,16 +65,23 @@ def login(lg, pw):
     for i in range(len(colum0)):
         userLogins[colum0[i]] = colum1[i]
     #print(userLogins) #print hele dictionary voor test purpose
+    accesGranted = False
     if lg in colum0:
         if pw == userLogins[lg]:
             accesGranted = True
             print("Login succesful.")
         else:
             accesGranted = False
-            print("Login failed.")
+            print("Login failed, invalid password.")
+    else:
+        accesGranted = False
+        print("Login failed, invalid username.")
     return accesGranted
 
 def createLogin(nLg, nPw):
+    """"Kijkt per regel van login.csv of de username matcht met invoer,
+    is dit niet het geval dan word de nieuwe username met bijhorende
+    password aan de database toegevoegt"""
     inUse = True
     f = open('login.csv', 'a', newline = '\n')
     r = open('login.csv', 'r')
