@@ -21,7 +21,7 @@ response = requests.get('http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='+key
 
 def schrijf_xml(reponse):
     """Schrijft de response in films.xml"""
-    bestand = codecs.open('films.xml', "w", "iso-8859-1")
+    bestand = codecs.open('films.xml', "w", "UTF-8")
     bestand.write(str(response.text))
     bestand.close()
 
@@ -58,7 +58,7 @@ def generateCode():
         print("TEST: code was in gebruik - herhalen")
         generateCode()
     else:
-        print("TEST - geschreven code: "+code)
+        print("TEST - unieke code code: "+code)
         return code
 
 def clearFile(file): #naam van file bv clearFile('kluis.csv')
@@ -67,9 +67,6 @@ def clearFile(file): #naam van file bv clearFile('kluis.csv')
     clear.close()
     print("De inhoud van "+file+" is verwijdert.")
 
-def antwoord(text):
-    from tkinter.messagebox import showinfo
-    showinfo(title='popup', message='Hoi '+text)
 
 ################# EINDE DEF FUNCTIES ###########
 
@@ -82,15 +79,4 @@ print("\n") #witregel voor overzicht
 code = generateCode()
 kaartjeKopen(code)
 
-#######TKinter start######
-window = tkinter.Tk()
-tk = tkinter
-label = tk.Label(window, text='Vul uw email adres in:')
-label.pack()
-naam = tk.Entry(window)
-naam.pack()
-button = tk.Button(window, text='Voer in',command=(lambda: antwoord(naam.get())))
-button.pack()
 
-
-window.mainloop()
