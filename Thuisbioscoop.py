@@ -42,10 +42,38 @@ def escapeXML(text):
     text = text.replace("&Eacute;", "e") #moet é zijn maar geeft raar teken (werkt mss in Tkinter)
     return text
 
+def login(lg, pw):
+    userLogins = {
+
+    }
+    r = open('login.csv', 'r')
+    reader = csv.reader(r, delimiter = ',')
+    colum0 = []
+    colum1 = []
+    for row in reader:
+        for colum in reader:
+            colum0.append(colum[0])
+            colum1.append(colum[1])
+            continue
+        continue
+    r.close()
+
+    for i in range(len(colum0)):
+        userLogins[colum0[i]] = colum1[i]
+    print(userLogins)
+    if lg =
+
+def createLogin(nLg, nPw):
+    f = open('login.csv', 'a')
+    writer = csv.writer(f, delimiter = ',')
+    writer.writerow((nLg, nPw))
+    print("New user added: "+nLg)
+    f.close()
+
 def print_filmnamen(film_dict):
     """Print alle films met bijhorende zender"""
     for film in film_dict['filmsoptv']['film']:
-        s = (film['titel']+" "+str(film['zender'])) # de string
+        s = (film['titel']+" - "+str(film['zender'])) # de string
         b = escapeXML(s) # escape
         print(b)
         #print('{} {}'.format(film['titel'], str(film['zender'])))
@@ -53,14 +81,14 @@ def print_filmnamen(film_dict):
 
 def kaartjeKopen(code): #code moet uit generateCode komen
     """Wijs unieke code toe en zet deze in csv bestand"""
-    f = open('code.csv', 'a', newline = '')
+    f = open('database.csv', 'a', newline = '')
     writer = csv.writer(f, delimiter = ',')
-    writer.writerow((code,)) #ticket ID toevoegen
+    writer.writerow((code,)) #ticket ID toevoegen & film
     f.close()
 
 def generateCode():
     """Genereert een unieke code op basis van uuid4"""
-    r = open('code.csv', 'r')
+    r = open('database.csv', 'r')
     reader = csv.reader(r, delimiter = ',')
     inGebruik = []
     for row in reader:
@@ -71,12 +99,12 @@ def generateCode():
         print("TEST: code was in gebruik - herhalen")
         generateCode()
     else:
-        print("TEST - unieke code code: "+code)
+        print("TEST - unieke code code aangemaakt: "+code)
         return code
 
 def codeInDb(code):
     """kijkt of de uuid4 in de database voorkomt"""
-    r = open('code.csv', 'r')
+    r = open('database.csv', 'r')
     reader = csv.reader(r, delimiter = ',')
     inDb = []
     for row in reader:
@@ -106,7 +134,7 @@ print_filmnamen(films_dict)
 
 print("\n") #witregel voor overzicht
 code = generateCode()
-kaartjeKopen(code)
+kaartjeKopen(code) #kan alleen uitvoeren als variablen boven zijn declared
 
-
-
+login('steven','lol') #login komt uit tkinter
+#createLogin('kees','lol') #login maken gebeurt in tkinter
