@@ -38,8 +38,8 @@ def escapeXML(text):
     text = text.replace("&apos;", "'")
     text = text.replace("&lt;", "<")
     text = text.replace("&gt;", ">")
-    text = text.replace("&eacute;", "é")
-    text = text.replace("&Eacute;", "é")
+    text = text.replace("&eacute;", "e") #moet é zijn maar geeft raar teken
+    text = text.replace("&Eacute;", "e") #moet é zijn maar geeft raar teken (werkt mss in Tkinter)
     return text
 
 def print_filmnamen(film_dict):
