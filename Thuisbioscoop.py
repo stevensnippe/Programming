@@ -60,12 +60,18 @@ def generateCode():
         print("TEST - geschreven code: "+code)
         return code
 
+def clearFile(file): #naam van file bv clearFile('kluis.csv')
+    """Maakt de csv file leeg"""
+    clear = open(file, 'w+')
+    clear.close()
+    print("De inhoud van "+file+" is verwijdert.")
 
 
+#clearFile #maakt gekozen file leeg
 schrijf_xml(response)
 films_dict = verwerk_xml()
 print_filmnamen(films_dict)
-print("\n") #witregel
+print("\n") #witregel voor overzicht
 code = generateCode()
 kaartjeKopen(code)
 
