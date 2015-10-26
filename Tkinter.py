@@ -5,12 +5,19 @@ def getText(text):
     showinfo(title='popup', message='Hoi '+text)
 
 window = tkinter.Tk()
-window.minsize(150,50)
+window.geometry("300x300")
+window.title("Flexchill")
+window.wm_iconbitmap("favicon.ico")  #de logo van het programma
+
 tk = tkinter
 label = tk.Label(window, text='Vul uw email adres in:')
-label.pack()
+
 email = tk.Entry(window)
-email.pack()
+
 button = tk.Button(window, text='Enter',command=(lambda: getText(email.get())))
+
+
+label.pack()
+email.pack()
 button.pack()
 window.mainloop()
