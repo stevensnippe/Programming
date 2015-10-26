@@ -21,7 +21,7 @@ response = requests.get('http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='+key
 
 def schrijf_xml(reponse):
     """Schrijft de response in films.xml"""
-    bestand = codecs.open('films.xml', "w", "UTF-8")
+    bestand = codecs.open('films.xml', "w", "iso-8859-1")
     bestand.write(str(response.text))
     bestand.close()
 
@@ -31,10 +31,23 @@ def verwerk_xml():
     bestand.close()
     return xmltodict.parse(xml_string)
 
+# na lang zoeken: http://www.stuffaboutcode.com/2012/06/python-encode-xml-escape-characters.html
+def escapeXML(text):
+    text = text.replace("&amp;", "&")
+    text = text.replace("&quot;", "\"")
+    text = text.replace("&apos;", "'")
+    text = text.replace("&lt;", "<")
+    text = text.replace("&gt;", ">")
+    text = text.replace("&eacute;", "é")
+    text = text.replace("&Eacute;", "é")
+    return text
+
 def print_filmnamen(film_dict):
     """Print alle films met bijhorende zender"""
     for film in film_dict['filmsoptv']['film']:
-        print(film['titel']+" "+str(film['zender']))
+        s = (film['titel']+" "+str(film['zender'])) # de string
+        b = escapeXML(s) # escape
+        print(b)
         #print('{} {}'.format(film['titel'], str(film['zender'])))
         #print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
@@ -75,8 +88,10 @@ def clearFile(file): #naam van file bv clearFile('kluis.csv')
 schrijf_xml(response)
 films_dict = verwerk_xml()
 print_filmnamen(films_dict)
+
 print("\n") #witregel voor overzicht
 code = generateCode()
 kaartjeKopen(code)
+
 
 
