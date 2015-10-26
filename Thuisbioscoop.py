@@ -1,8 +1,11 @@
 import requests #get data from API
 import time     #get current date
 import tkinter  #draw interface
+import tkinter.messagebox
 import codecs
 import xmltodict
+import uuid     #genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420) - uuid.uuid4()
+import csv      #CSV bestand om unieke codes in op te slaan
 
 # ~---> master branch password is v1q <---~
 """
@@ -17,7 +20,8 @@ response = requests.get('http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='+key
 #print(response.text)
 
 def schrijf_xml(reponse):
-    bestand = codecs.open('films.xml', "w", "utf-8")
+    """Schrijft de response in films.xml"""
+    bestand = codecs.open('films.xml', "w", "iso-8859-1")
     bestand.write(str(response.text))
     bestand.close()
 
@@ -28,13 +32,41 @@ def verwerk_xml():
     return xmltodict.parse(xml_string)
 
 def print_filmnamen(film_dict):
+    """Print alle films met bijhorende zender"""
     for film in film_dict['filmsoptv']['film']:
         print(film['titel']+" "+str(film['zender']))
         #print('{} {}'.format(film['titel'], str(film['zender'])))
         #print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
+def kaartjeKopen(code): #code moet uit generateCode komen
+    """Wijs unieke code toe en zet deze in csv bestand"""
+    f = open('code.csv', 'a', newline = '')
+    writer = csv.writer(f, delimiter = ',')
+    writer.writerow((code,)) #ticket ID toevoegen
+    f.close()
+
+def generateCode():
+    r = open('code.csv', 'r')
+    reader = csv.reader(r, delimiter = ',')
+    inGebruik = []
+    for row in reader:
+        for colum in reader:
+            inGebruik.append(colum[0])
+    code = str(uuid.uuid4())
+    if code in inGebruik:
+        print("TEST: code was in gebruik - herhalen")
+        generateCode()
+    else:
+        print("TEST - geschreven code: "+code)
+        return code
+
+
+
 schrijf_xml(response)
 films_dict = verwerk_xml()
 print_filmnamen(films_dict)
+print("\n") #witregel
+code = generateCode()
+kaartjeKopen(code)
 
 
