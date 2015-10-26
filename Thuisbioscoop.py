@@ -46,6 +46,7 @@ def kaartjeKopen(code): #code moet uit generateCode komen
     f.close()
 
 def generateCode():
+    """Genereert een unieke code op basis van uuid4"""
     r = open('code.csv', 'r')
     reader = csv.reader(r, delimiter = ',')
     inGebruik = []
