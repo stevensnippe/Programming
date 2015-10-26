@@ -48,8 +48,8 @@ def login(lg, pw):
     }
     r = open('login.csv', 'r')
     reader = csv.reader(r, delimiter = ',')
-    colum0 = []
-    colum1 = []
+    colum0 = [] #user
+    colum1 = [] #pw
     for row in reader:
         for colum in reader:
             colum0.append(colum[0])
@@ -60,15 +60,39 @@ def login(lg, pw):
 
     for i in range(len(colum0)):
         userLogins[colum0[i]] = colum1[i]
-    print(userLogins)
-    if lg =
+    #print(userLogins) #print hele dictionary voor test purpose
+    if lg in colum0:
+        if pw == userLogins[lg]:
+            accesGranted = True
+            print("Login succesful.")
+        else:
+            accesGranted = False
+            print("Login failed.")
+    return accesGranted
 
 def createLogin(nLg, nPw):
-    f = open('login.csv', 'a')
+    inUse = True
+    f = open('login.csv', 'a', newline = '\n')
+    r = open('login.csv', 'r')
     writer = csv.writer(f, delimiter = ',')
-    writer.writerow((nLg, nPw))
-    print("New user added: "+nLg)
+    reader = csv.reader(r, delimiter = ',')
+    for row in reader:
+        if nLg == (row[0]):
+            print("Gebruikersnaam bestaat al.")
+            inUse = True
+            break
+        else:
+            inUse = False
+            continue
+
+    if inUse == False:
+            if row[0] != 'naam':
+                writer.writerow( ('naam', 'wachtwoord') )
+                writer.writerow( (nLg, nPw) )
+            else:
+                writer.writerow( (nLg, nPw) )
     f.close()
+    r.close()
 
 def print_filmnamen(film_dict):
     """Print alle films met bijhorende zender"""
@@ -136,5 +160,5 @@ print("\n") #witregel voor overzicht
 code = generateCode()
 kaartjeKopen(code) #kan alleen uitvoeren als variablen boven zijn declared
 
-login('steven','lol') #login komt uit tkinter
-#createLogin('kees','lol') #login maken gebeurt in tkinter
+#login('steven','lol') #login komt uit tkinter
+createLogin('baksteen','lol') #login maken gebeurt in tkinter
