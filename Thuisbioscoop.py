@@ -114,8 +114,9 @@ def print_filmnamen(film_dict):
     """Print alle films met bijhorende zender"""
     for film in film_dict['filmsoptv']['film']:
         s = (film['titel']+" - "+str(film['zender'])) # de string
-        b = escapeXML(s) # escape
+        b = escapeXML(s) # escapes(replaces) characters &amp etc and makes new string
         print(b)
+    return(b)
         #print('{} {}'.format(film['titel'], str(film['zender'])))
         #print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
