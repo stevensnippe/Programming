@@ -5,21 +5,31 @@ import Thuisbioscoop as TB
 
 
 def logIn():
-    user = username.get()
-    pw = password.get()
-    accesGranted = TB.login(user, pw)
-    print(accesGranted)
-    if accesGranted == True:
-        print("ja")
-        #hier de code om naar het volgende scherm te gaan waar films worden gedisplayed
-        return True
+    if TB.loginPogingen > 0:
+        user = username.get()
+        pw = password.get()
+        accesGranted = TB.login(user, pw)
+        #print(accesGranted)
+        if accesGranted == True:
+            print("ja")
+            #hier de code om naar het volgende scherm te gaan waar films worden gedisplayed
+            return True
+        else:
+            TB.loginPogingen -= 1
+            attemptsLeft['text'] = "Attempts left: "+str(TB.loginPogingen)
+            warning['text'] = "Login failed, invalid username or password."
+            if TB.loginPogingen == 0:
+                warning['text'] = "Too many failed login attempts - wait 5 minutes."
+                #username['bg'] = "red"
+                #password['bg'] = "red"
+                username.configure(state = "disabled")
+                password.configure(state = "disabled")
+                bsignin.configure(state = "disabled")
+                photo.configure(file="blocked.gif")
+            return False
     else:
-        TB.loginPogingen -= 1
-        attemptsLeft['text'] = "Attempts left: "+str(TB.loginPogingen)
-        warning['text'] = "Login failed"
+        warning['text'] = "Too many failed login attempts - wait 5 minutes."
         return False
-
-
 
 
 def newuser():
@@ -46,15 +56,15 @@ w = tk.Label(window, image=photo)
 
 label = tk.Label(window, text='Username:', fg="white", bg="black")
 
-username = tk.Entry(window)
+username = tk.Entry(window, bg="white")
 
 passlabel = tk.Label(window, text="Password:", fg="white", bg="black")
 
-password = tk.Entry(window)
+password = tk.Entry(window, bg="white")
 
 bsignin = tk.Button(window, text='Sign in',command=(lambda: logIn()))
 
-attemptsLeft = tk.Label(window, text="Attempts left: 3", fg="white", bg="black")
+attemptsLeft = tk.Label(window, text="Attempts left: 5", fg="white", bg="black")
 
 warning = tk.Label(window, text="", fg="red", bg="black")
 
