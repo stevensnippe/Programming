@@ -8,7 +8,6 @@ import uuid     #genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420) 
 import csv      #CSV bestand om unieke codes in op te slaan
 #import Tkinter  #Importeert Tkinter.py (GUI)
 loginPogingen = 5
-toegang = False
 
 """
 Aan de parameter key geeft je de eigen unieke API sleutel mee.

@@ -25,8 +25,9 @@ def logIn():
         user = username.get()
         pw = password.get()
         accesGranted = TB.login(user, pw)
-        #print(accesGranted)
+        # print(accesGranted)
         if accesGranted == True: # TODO: image en tekst naar het midden bij succesful login
+            # bron: http://stackoverflow.com/questions/10817917/how-to-disable-input-to-a-text-widget-but-allow-programatic-input
             print("test")
             username.pack_forget() #hide field
             password.pack_forget()
@@ -57,6 +58,16 @@ def logIn():
         warning['text'] = "Too many failed login attempts - wait 5 minutes."
         return False
 
+def createAccount():
+    if TB.toegang == True:
+        user = ename.get()
+        pw = epassword.get()
+        email = eemail.get()
+        provider = comboprovider.get()
+        gender = ""
+        # TB.createLogin(user, pw, email, provider)
+    print(user, pw, email, provider) # , gender --- hoe haal ik info van radiobutton @Debug
+
 
 def newuser():
     global newuserwindow
@@ -70,23 +81,29 @@ def newuser():
     newuserwindow.configure(background=background)
 
     lname = tk.Label(newuserwindow, text="Username:", fg=textkleur, bg=background)
+    global ename
     ename = tk.Entry(newuserwindow)
 
     # g = tk.StringVar(g)
     lgender = tk.Label(newuserwindow, text="Gender:", fg=textkleur, bg=background)
+    global radiogender1
     radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value=1, fg=textkleur, bg=background)
+    global radiogender2
     radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value=2, fg=textkleur, bg=background)
 
     lemail = tk.Label(newuserwindow, text="Email:", fg=textkleur, bg=background)
+    global eemail
     eemail = tk.Entry(newuserwindow)
 
     lpassword = tk.Label(newuserwindow, text="Password:", fg=textkleur, bg=background)
+    global epassword
     epassword = tk.Entry(newuserwindow)
 
     lprovider = tk.Label(newuserwindow, text="Provider", fg=textkleur, bg=background)
-    comboprovider = tk.ttk.Combobox(newuserwindow, values=["kpn","ziggo","fox","xs4all"])
+    global comboprovider
+    comboprovider = tk.ttk.Combobox(newuserwindow, values=["","kpn","ziggo","fox","xs4all"])
 
-    makeaccount = tk.Button(newuserwindow, bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, text="Make Account")
+    makeaccount = tk.Button(newuserwindow, bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, text="Make Account", command=(lambda: createAccount()))
     gobackwindow = tk.Button(newuserwindow, text="Back", bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: goback(1)))  # werkt niet, geeft errors (zie functie goback(a))
 
 
