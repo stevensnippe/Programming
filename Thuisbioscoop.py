@@ -84,7 +84,7 @@ def login(lg, pw):
     return accesGranted
 
 def createLogin(nLg, nPw, nEmail, nProvider, nGender):
-    """"Kijkt per regel van login.csv of de username matcht met invoer,
+    """Kijkt per regel van login.csv of de username matcht met invoer,
     is dit niet het geval dan word de nieuwe username met bijhorende
     password aan de database toegevoegt"""
     inUse = True
@@ -129,6 +129,7 @@ def kaartjeKopen(code): #code moet uit generateCode komen
 
 def generateCode():
     """Genereert een unieke code op basis van uuid4"""
+    # UUID4: http://stackoverflow.com/questions/1210458/how-can-i-generate-a-unique-id-in-python
     r = open('database.csv', 'r')
     reader = csv.reader(r, delimiter = ',')
     inGebruik = []
