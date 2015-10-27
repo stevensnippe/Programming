@@ -172,8 +172,8 @@ def clearFile(file): #naam van file bv clearFile('kluis.csv')
 
 
 #clearFile #maakt gekozen file leeg
-schrijf_xml(response)
-films_dict = verwerk_xml()
+#schrijf_xml(response) <
+#films_dict = verwerk_xml() <
 #print_filmnamen(films_dict)
 
 #print("\n") #witregel voor overzicht
