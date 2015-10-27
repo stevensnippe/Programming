@@ -3,7 +3,14 @@ import tkinter.ttk
 # from PIL import ImageTk, Image
 g=0
 tk = tkinter
-
+global background
+background = "#153341"
+global textkleur
+textkleur = "#51dfd4"
+global windowsize
+windowsize = "500x500"
+global titelimage
+titleimage = "deze.gif"
 
 
 def gettext(text, password):
@@ -18,25 +25,26 @@ def newuser():
     window.destroy()
     rommel.destroy()
     newuserwindow = tkinter.Tk()
+    newuserwindow.geometry(windowsize)
     newuserwindow.title("Flexchill")
     newuserwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
-    newuserwindow.configure(background="black")
+    newuserwindow.configure(background=background)
 
-    lname = tk.Label(newuserwindow, text="Name:", fg="white", bg="black")
+    lname = tk.Label(newuserwindow, text="Name:", fg=textkleur, bg=background)
     ename = tk.Entry(newuserwindow)
 
     g = tk.StringVar(g)
-    lgender = tk.Label(newuserwindow, text="Gender:", fg="white", bg="black")
-    radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value=1, fg="white", bg="black")
-    radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value=2, fg="white", bg="black")
+    lgender = tk.Label(newuserwindow, text="Gender:", fg=textkleur, bg=background)
+    radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value=1, fg=textkleur, bg=background)
+    radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value=2, fg=textkleur, bg=background)
 
-    lemail = tk.Label(newuserwindow, text="Email:", fg="white", bg="black")
+    lemail = tk.Label(newuserwindow, text="Email:", fg=textkleur, bg=background)
     eemail = tk.Entry(newuserwindow)
 
-    lpassword = tk.Label(newuserwindow, text="Password:", fg="white", bg="black")
+    lpassword = tk.Label(newuserwindow, text="Password:", fg=textkleur, bg=background)
     epassword = tk.Entry(newuserwindow)
 
-    lprovider = tk.Label(newuserwindow, text="Provider", fg="white", bg="black")
+    lprovider = tk.Label(newuserwindow, text="Provider", fg=textkleur, bg=background)
     comboprovider = tk.ttk.Combobox(newuserwindow, values=["kpn","ziggo","fox","xs4all"])
 
     makeaccount = tk.Button(newuserwindow, text="Make Account")
@@ -73,21 +81,21 @@ def menu():
     rommel = tkinter.Tk()  # houd een tweede scherm tegen
     rommel.withdraw()
     window = tkinter.Toplevel()
-    window.geometry("300x300")
+    window.geometry(windowsize)
     window.title("Flexchill")
     window.wm_iconbitmap("favicon.ico")  # de logo van het programma
-    window.configure(background="black")
+    window.configure(background=background)
 
     photo = tk.PhotoImage(file="deze.gif")
-    w = tk.Label(window, image=photo)
+    w = tk.Label(window, image=photo, borderwidth="0")
     w.image = photo
     # w.place(x=0, y=0, relwidth=1, relheight=1) #voor het geval je het als achtergrond wil plaatsen, w.pack() moet uit staan
 
-    label = tk.Label(window, text='Username:', fg="white", bg="black")
+    label = tk.Label(window, text='Username:', fg=textkleur, bg=background)
 
     email = tk.Entry(window)
 
-    passlabel = tk.Label(window, text="Password:", fg="white", bg="black")
+    passlabel = tk.Label(window, text="Password:", fg=textkleur, bg=background)
 
     password = tk.Entry(window)
 
