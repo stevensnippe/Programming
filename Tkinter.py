@@ -26,7 +26,7 @@ def logIn():
         pw = password.get()
         accesGranted = TB.login(user, pw)
         # print(accesGranted)
-        if accesGranted == True: # TODO: image en tekst naar het midden bij succesful login
+        if accesGranted == True:
             # bron: http://stackoverflow.com/questions/10817917/how-to-disable-input-to-a-text-widget-but-allow-programatic-input
             print("test")
             username.pack_forget() #hide field
@@ -37,8 +37,12 @@ def logIn():
             passlabel.pack_forget()
             bsignup.pack_forget()
             warning.pack_forget()
-            label2 = tk.Label(window, text='Login succesful, u word doorverwezen.', fg="white", bg="black")
+            label2 = tk.Label(window, text='Login succesful, redirecting.', fg=textkleur, bg=background)
             label2.pack()
+            photo2 = tk.PhotoImage(file="loading.gif") # TODO:laad alleen eerste frame, is animated GIF
+            w = tk.Label(window, image=photo2, borderwidth="0")
+            w.image = photo2
+            w.pack()
             #TODO: hier de code om naar het volgende scherm te gaan waar films worden gedisplayed (nieuwe def)
             return True
         else:
@@ -59,15 +63,28 @@ def logIn():
         return False
 
 def createAccount():
-    if TB.toegang == True:
-        user = ename.get()
-        pw = epassword.get()
-        email = eemail.get()
-        provider = comboprovider.get()
-        gender = ""
-        # TB.createLogin(user, pw, email, provider)
-    print(user, pw, email, provider) # , gender --- hoe haal ik info van radiobutton @Debug
+    user = ename.get()
+    pw = epassword.get()
+    email = eemail.get()
+    provider = comboprovider.get()
+    gender = ""
 
+    # velden resetten naar defaultcolor white
+    ename['bg'] = "white"
+    epassword['bg'] = "white"
+    eemail['bg'] = "white"
+    #comboprovider['bg'] = background
+
+    if ("." and "@" in email) and provider != "":
+        inGebruik = TB.createLogin(user, pw, email, provider, "M") # return = True/False alleen gebaseerd op naam
+        print("login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(inGebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
+        if inGebruik == True:
+            ename['bg'] = "red"
+            # TODO: Errortextlabel + verkeerde input roodmaken
+        else:
+            pass
+            # print("test"+radiogender1.selection_get())
+            # TODO: goto redirect window of account creation
 
 def newuser():
     global newuserwindow

@@ -109,6 +109,7 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender):
                 writer.writerow( (nLg, nPw, nEmail, nProvider, nGender) )
     f.close()
     r.close()
+    return inUse
 
 def print_filmnamen(film_dict):
     """Print alle films met bijhorende zender"""
