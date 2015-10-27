@@ -69,7 +69,7 @@ def newuser():
     newuserwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     newuserwindow.configure(background=background)
 
-    lname = tk.Label(newuserwindow, text="Name:", fg=textkleur, bg=background)
+    lname = tk.Label(newuserwindow, text="Username:", fg=textkleur, bg=background)
     ename = tk.Entry(newuserwindow)
 
     # g = tk.StringVar(g)
@@ -89,13 +89,14 @@ def newuser():
     makeaccount = tk.Button(newuserwindow, bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, text="Make Account")
     gobackwindow = tk.Button(newuserwindow, text="Back", bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: goback(1)))  # werkt niet, geeft errors (zie functie goback(a))
 
-    lname.pack()
-    ename.pack()
+
+    lemail.pack()
+    eemail.pack()
     lgender.pack()
     radiogender1.pack()
     radiogender2.pack()
-    lemail.pack()
-    eemail.pack()
+    lname.pack()
+    ename.pack()
     lpassword.pack()
     epassword.pack()
     lprovider.pack()
