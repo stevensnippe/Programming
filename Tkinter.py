@@ -26,7 +26,7 @@ def logIn():
         pw = password.get()
         accesGranted = TB.login(user, pw)
         #print(accesGranted)
-        if accesGranted == True: #TODO: image en tekst naar het midden bij succesful login
+        if accesGranted == True: # TODO: image en tekst naar het midden bij succesful login
             print("test")
             username.pack_forget() #hide field
             password.pack_forget()
@@ -86,8 +86,8 @@ def newuser():
     lprovider = tk.Label(newuserwindow, text="Provider", fg=textkleur, bg=background)
     comboprovider = tk.ttk.Combobox(newuserwindow, values=["kpn","ziggo","fox","xs4all"])
 
-    makeaccount = tk.Button(newuserwindow, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, text="Make Account")
-    gobackwindow = tk.Button(newuserwindow, text="Back", activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: goback(1)))  # werkt niet, geeft errors (zie functie goback(a))
+    makeaccount = tk.Button(newuserwindow, bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, text="Make Account")
+    gobackwindow = tk.Button(newuserwindow, text="Back", bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: goback(1)))  # werkt niet, geeft errors (zie functie goback(a))
 
     lname.pack()
     ename.pack()
@@ -139,15 +139,15 @@ def menu():
     global password
     password = tk.Entry(window)
     global bsignin
-    bsignin = tk.Button(window, text='Sign in', activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: logIn()))
+    bsignin = tk.Button(window, text='Sign in', bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: logIn()))
     global attemptsLeft
     attemptsLeft = tk.Label(window, text="Attempts left: 5", fg="white", bg=background)
     global warning
     warning = tk.Label(window, text="", fg="red", bg=background)
     global bsignup
-    bsignup = tk.Button(window, text="Sign up", activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: newuser()))
+    bsignup = tk.Button(window, text="Sign up", bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: newuser()))
 
-    bquit = tk.Button(window, text="Quit", activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: rommel.destroy() and window.destroy()))
+    bquit = tk.Button(window, text="Quit", bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: rommel.destroy() and window.destroy()))
     # hieronder staat de volgorde van de programma's
     w.pack(side="top")
     label.pack()
