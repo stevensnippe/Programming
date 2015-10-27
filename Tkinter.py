@@ -1,6 +1,7 @@
 import tkinter
 import tkinter.ttk
 import Thuisbioscoop as TB
+import time
 # from PIL import ImageTk, Image
 g=0
 tk = tkinter
@@ -30,7 +31,7 @@ def logIn():
             passlabel.pack_forget()
             bsignup.pack_forget()
             warning.pack_forget()
-            label2 = tk.Label(window, text='Login succesful, u word doorverwezen.', fg="white", bg="black")
+            label2 = tk.Label(window, text='Login succesful, u word doorverwezen.', fg="white", bg=background)
             label2.pack()
             #TODO: hier de code om naar het volgende scherm te gaan waar films worden gedisplayed (nieuwe def)
             return True
