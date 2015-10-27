@@ -75,16 +75,16 @@ def createAccount():
     eemail['bg'] = "white"
     #comboprovider['bg'] = background
 
-    if ("." and "@" in email) and provider != "":
-        inGebruik = TB.createLogin(user, pw, email, provider, "M") # return = True/False alleen gebaseerd op naam
-        print("login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(inGebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
-        if inGebruik == True:
-            ename['bg'] = "red"
-            # TODO: Errortextlabel + verkeerde input roodmaken
-        else:
-            pass
-            # print("test"+radiogender1.selection_get())
-            # TODO: goto redirect window of account creation
+    # if ("." and "@" in email) and provider != "":
+    inGebruik = TB.createLogin(user, pw, email, provider, "M") # return = True/False alleen gebaseerd op naam
+    print("login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(inGebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
+    if inGebruik == True:
+        ename['bg'] = "red"
+        # TODO: Errortextlabel + verkeerde input roodmaken
+    else:
+        pass
+        # print("test"+radiogender1.selection_get())
+        # TODO: goto redirect window of account creation
 
 def newuser():
     global newuserwindow
@@ -114,7 +114,7 @@ def newuser():
 
     lpassword = tk.Label(newuserwindow, text="Password:", fg=textkleur, bg=background)
     global epassword
-    epassword = tk.Entry(newuserwindow)
+    epassword = tk.Entry(newuserwindow, show="*")
 
     lprovider = tk.Label(newuserwindow, text="Provider", fg=textkleur, bg=background)
     global comboprovider
