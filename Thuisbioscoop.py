@@ -6,7 +6,8 @@ import codecs
 import xmltodict
 import uuid     #genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420) - uuid.uuid4()
 import csv      #CSV bestand om unieke codes in op te slaan
-import Tkinter  #Importeert Tkinter.py (GUI)
+#import Tkinter  #Importeert Tkinter.py (GUI)
+loginPogingen = 5
 
 """
 Aan de parameter key geeft je de eigen unieke API sleutel mee.
@@ -70,13 +71,16 @@ def login(lg, pw):
     if lg in colum0:
         if pw == userLogins[lg]:
             accesGranted = True
-            print("Login succesful.")
+            msg = ("Login succesful.")
+            print(msg)
         else:
             accesGranted = False
-            print("Login failed, invalid password.")
+            msg = ("Login failed, invalid password.")
+            print(msg)
     else:
         accesGranted = False
-        print("Login failed, invalid username.")
+        msg = ("Login failed, invalid username.")
+        print(msg)
     return accesGranted
 
 def createLogin(nLg, nPw):
@@ -161,7 +165,7 @@ def clearFile(file): #naam van file bv clearFile('kluis.csv')
     """Maakt de csv file leeg"""
     clear = open(file, 'w+')
     clear.close()
-    print("De inhoud van "+file+" is verwijdert.")
+    print("De inhoud van "+str(file)+" is verwijdert.")
 
 
 ################# EINDE DEF FUNCTIES ###########
@@ -170,12 +174,12 @@ def clearFile(file): #naam van file bv clearFile('kluis.csv')
 #clearFile #maakt gekozen file leeg
 schrijf_xml(response)
 films_dict = verwerk_xml()
-print_filmnamen(films_dict)
+#print_filmnamen(films_dict)
 
-print("\n") #witregel voor overzicht
-code = generateCode()
-kaartjeKopen(code) #kan alleen uitvoeren als variablen boven zijn declared
+#print("\n") #witregel voor overzicht
+#code = generateCode()
+#kaartjeKopen(code) #kan alleen uitvoeren als variablen boven zijn declared
 
 #login('steven','lol') #variablen hiervoor komen uit tkinter
 #createLogin('baksteen','lol') #login maken gebeurt in tkinter
-codeInDb('96df784b-606a-4ede-8eae-e1b0cdc3169b')
+#codeInDb('96df784b-606a-4ede-8eae-e1b0cdc3169b')
