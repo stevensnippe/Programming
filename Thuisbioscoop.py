@@ -81,7 +81,7 @@ def login(lg, pw):
         accesGranted = False
         msg = ("Login failed, invalid username.")
         print(msg)
-    return accesGranted, msg
+    return accesGranted
 
 def createLogin(nLg, nPw):
     """"Kijkt per regel van login.csv of de username matcht met invoer,
