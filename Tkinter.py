@@ -67,7 +67,6 @@ def newuser():
     lname = tk.Label(newuserwindow, text="Name:", fg=textkleur, bg=background)
     ename = tk.Entry(newuserwindow)
 
-    g = tk.StringVar(g)
     lgender = tk.Label(newuserwindow, text="Gender:", fg=textkleur, bg=background)
     radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value=1, fg=textkleur, bg=background)
     radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value=2, fg=textkleur, bg=background)
@@ -132,7 +131,7 @@ def menu():
     global passlabel
     passlabel = tk.Label(window, text="Password:", fg=textkleur, bg=background)
     global password
-    password = tk.Entry(window)
+    password = tk.Entry(window, show="*")
     global bsignin
     bsignin = tk.Button(window, text='Sign in', command=(lambda: logIn()))
     global attemptsLeft
