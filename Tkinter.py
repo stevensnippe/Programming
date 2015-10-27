@@ -12,6 +12,12 @@ global windowsize
 windowsize = "350x300"
 global titelimage
 titleimage = "deze.gif"
+global activebackgroundbutton
+activebackgroundbutton = "#245A69"
+global activeforegroundbutton
+activeforegroundbutton = "#48ABAA"
+global highlightbuttoncolorthingy
+highlightbuttoncolorthingy = "#6B99A0"
 
 
 def logIn():
@@ -55,7 +61,6 @@ def logIn():
 def newuser():
     global newuserwindow
     global g
-    global v
     window.destroy()
     rommel.destroy()
     newuserwindow = tkinter.Tk()
@@ -67,7 +72,7 @@ def newuser():
     lname = tk.Label(newuserwindow, text="Name:", fg=textkleur, bg=background)
     ename = tk.Entry(newuserwindow)
 
-    g = tk.StringVar(g)
+    # g = tk.StringVar(g)
     lgender = tk.Label(newuserwindow, text="Gender:", fg=textkleur, bg=background)
     radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value=1, fg=textkleur, bg=background)
     radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value=2, fg=textkleur, bg=background)
@@ -81,8 +86,8 @@ def newuser():
     lprovider = tk.Label(newuserwindow, text="Provider", fg=textkleur, bg=background)
     comboprovider = tk.ttk.Combobox(newuserwindow, values=["kpn","ziggo","fox","xs4all"])
 
-    makeaccount = tk.Button(newuserwindow, text="Make Account")
-    gobackwindow = tk.Button(newuserwindow, text="Back", command=(lambda: goback(1)))  # werkt niet, geeft errors (zie functie goback(a))
+    makeaccount = tk.Button(newuserwindow, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, text="Make Account")
+    gobackwindow = tk.Button(newuserwindow, text="Back", activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: goback(1)))  # werkt niet, geeft errors (zie functie goback(a))
 
     lname.pack()
     ename.pack()
@@ -134,15 +139,15 @@ def menu():
     global password
     password = tk.Entry(window)
     global bsignin
-    bsignin = tk.Button(window, text='Sign in', command=(lambda: logIn()))
+    bsignin = tk.Button(window, text='Sign in', activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: logIn()))
     global attemptsLeft
     attemptsLeft = tk.Label(window, text="Attempts left: 5", fg="white", bg=background)
     global warning
     warning = tk.Label(window, text="", fg="red", bg=background)
     global bsignup
-    bsignup = tk.Button(window, text="Sign up", command=(lambda: newuser()))
+    bsignup = tk.Button(window, text="Sign up", activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: newuser()))
 
-    bquit = tk.Button(window, text="Quit", command=(lambda: rommel.destroy() and window.destroy()))
+    bquit = tk.Button(window, text="Quit", activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: rommel.destroy() and window.destroy()))
     # hieronder staat de volgorde van de programma's
     w.pack(side="top")
     label.pack()
