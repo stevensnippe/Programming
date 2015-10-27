@@ -75,7 +75,7 @@ def newuser():
     eemail = tk.Entry(newuserwindow)
 
     lpassword = tk.Label(newuserwindow, text="Password:", fg=textkleur, bg=background)
-    epassword = tk.Entry(newuserwindow)
+    epassword = tk.Entry(newuserwindow, show="*")
 
     lprovider = tk.Label(newuserwindow, text="Provider", fg=textkleur, bg=background)
     comboprovider = tk.ttk.Combobox(newuserwindow, values=["kpn","ziggo","fox","xs4all"])
