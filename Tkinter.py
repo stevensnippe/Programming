@@ -1,7 +1,9 @@
 import tkinter
+import tkinter.ttk
 # from PIL import ImageTk, Image
-
+g=0
 tk = tkinter
+
 
 
 def gettext(text, password):
@@ -11,6 +13,8 @@ def gettext(text, password):
 
 def newuser():
     global newuserwindow
+    global g
+    global v
     window.destroy()
     rommel.destroy()
     newuserwindow = tkinter.Tk()
@@ -21,21 +25,34 @@ def newuser():
     lname = tk.Label(newuserwindow, text="Name:", fg="white", bg="black")
     ename = tk.Entry(newuserwindow)
 
+    g = tk.StringVar(g)
+    lgender = tk.Label(newuserwindow, text="Gender:", fg="white", bg="black")
+    radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value=1, fg="white", bg="black")
+    radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value=2, fg="white", bg="black")
+
     lemail = tk.Label(newuserwindow, text="Email:", fg="white", bg="black")
     eemail = tk.Entry(newuserwindow)
 
     lpassword = tk.Label(newuserwindow, text="Password:", fg="white", bg="black")
     epassword = tk.Entry(newuserwindow)
 
+    lprovider = tk.Label(newuserwindow, text="Provider", fg="white", bg="black")
+    comboprovider = tk.ttk.Combobox(newuserwindow, values=["kpn","ziggo","fox","xs4all"])
+
     makeaccount = tk.Button(newuserwindow, text="Make Account")
     gobackwindow = tk.Button(newuserwindow, text="Back", command=(lambda: goback(1)))  # werkt niet, geeft errors (zie functie goback(a))
 
     lname.pack()
     ename.pack()
+    lgender.pack()
+    radiogender1.pack()
+    radiogender2.pack()
     lemail.pack()
     eemail.pack()
     lpassword.pack()
     epassword.pack()
+    lprovider.pack()
+    comboprovider.pack()
     makeaccount.pack()
     gobackwindow.pack(side="left")
     newuserwindow.mainloop()
