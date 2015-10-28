@@ -323,12 +323,12 @@ def huurdersfilm(film):
     useroverzicht.configure(background=background)
     lfilm = tk.Label(useroverzicht, text=film + ":", fg=textkleur, bg=background)
     lfilm.pack()
-    users = []  # TODO: hier komen de users van de film
+    users = ["kees", "jan", "piet"]  # TODO: hier komen de users van de film
+    userlabel = {}
     for i in users:
-        lb = tk.Label(useroverzicht, text=i, fg=textkleur, bg=background)
-        label[i] = lb
-        label[i].pack()
-    lfilm.pack()
+        lb3 = tk.Label(useroverzicht, text=i, fg=textkleur, bg=background)
+        userlabel[i] = lb3
+        userlabel[i].pack()
     useroverzicht.mainloop()
     # tk.messagebox.showinfo(film, film + ":\n" + "")  # TODO: de users van de bijbehorende film als tekst laten zien
 menu()
