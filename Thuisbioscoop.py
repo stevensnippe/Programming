@@ -172,7 +172,7 @@ def generateCode():
         w.close()
         r = open('database.csv', 'r')
         reader = csv.reader(r, delimiter = ',')
-    inGebruik = []
+    inGebruik = [] # TODO: schrijf efficienter indien tijd over
     for row in reader:
         for colum in reader:
             inGebruik.append(colum[0])
