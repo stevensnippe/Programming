@@ -103,7 +103,7 @@ def createAccount():
     #comboprovider['bg'] = background
 
     # if ("." and "@" in email) and provider != "":
-    inGebruik = TB.createLogin(user, pw, email, provider, "M", False) # SCHRIJFT NIET -- laatste parameter geeft aan alleen data ophalen
+    inGebruik = TB.createLogin(user, pw, email, provider, g, False) # SCHRIJFT NIET -- laatste parameter geeft aan alleen data ophalen
     print("login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(inGebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
 
     if inGebruik == False:
@@ -119,9 +119,9 @@ def createAccount():
         # TODO: Errortextlabel + verkeerde input roodmaken
 
     if inGebruik == False and readyToWrite == True:
-        TB.createLogin(user, pw, email, provider, "M", True) # True dus schrijven naar login.csv
+        TB.createLogin(user, pw, email, provider, g, True) # True dus schrijven naar login.csv
         inGebruik = True
-        print("DEBUG: Account created.")
+        print("DEBUG: Account created - "+str(g))
         goback(1)
         # print("test"+radiogender1.selection_get())
         # TODO: maak redirect window naar login + errors uit goback(1) halen
@@ -147,9 +147,9 @@ def newuser():
     # g = tk.StringVar(g)
     lgender = tk.Label(newuserwindow, text="Gender:", fg=textkleur, bg=background)
     global radiogender1
-    radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value=1, fg=textkleur, bg=background)
+    radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value="Male", fg=textkleur, bg=background)
     global radiogender2
-    radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value=2, fg=textkleur, bg=background)
+    radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value="Female", fg=textkleur, bg=background)
 
     lemail = tk.Label(newuserwindow, text="Email:", fg=textkleur, bg=background)
     global eemail
