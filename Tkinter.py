@@ -39,7 +39,7 @@ def logIn():
             bsignup.destroy()
             warning.destroy()
             window.configure(background="black")
-            label2 = tk.Label(window, text='Login succesful, redirecting.', fg=textkleur, bg=background)
+            label2 = tk.Label(window, text='Login succesful, redirecting.', fg=textkleur, bg="black")
             label2.pack()
             photo2 = tk.PhotoImage(file="loading.gif")
             # TODO:laad alleen eerste frame, is animated GIF
