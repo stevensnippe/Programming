@@ -50,10 +50,18 @@ def login(lg, pw):
     """Extract de contents van login.csv naar een dictionary en 2 tuples,
     dit is makkelijk voor het verder werken met de data - indien
     meer tijd over herschrijven naar efficientere methode"""
+    try:
+        r = open('login.csv', 'r')
+    except FileNotFoundError:
+        w = open('login.csv', 'w', newline='')
+        writer = csv.writer(w, delimiter = ',')
+        writer.writerow( ("Username", "Password", "Email", "Provider", "Gender") )
+        writer.writerow( ("test", "test", "test@.", "ziggo", "M") )
+        w.close()
+        r = open('login.csv', 'r')
     userLogins = {
 
     }
-    r = open('login.csv', 'r')
     reader = csv.reader(r, delimiter = ',')
     colum0 = [] #user
     colum1 = [] #pw
@@ -88,28 +96,32 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
     """Kijkt per regel van login.csv of de username matcht met invoer,
     is dit niet het geval dan word de nieuwe username met bijhorende
     password aan de database toegevoegt"""
-    inUse = True
-    f = open('login.csv', 'a', newline = '\n')
-    r = open('login.csv', 'r')
-    writer = csv.writer(f, delimiter = ',')
-    reader = csv.reader(r, delimiter = ',')
-    for row in reader:
-        if nLg == (row[0]):
-            print("Gebruikersnaam bestaat al.")
-            inUse = True
-            break
-        else:
-            inUse = False
-            continue
+    try:
+        inUse = True
+        f = open('login.csv', 'a', newline = '\n')
+        r = open('login.csv', 'r')
+        writer = csv.writer(f, delimiter = ',')
+        reader = csv.reader(r, delimiter = ',')
+        for row in reader:
+            if nLg == (row[0]):
+                print("Gebruikersnaam bestaat al.")
+                inUse = True
+                break
+            else:
+                inUse = False
+                continue
 
-    if inUse == False and write == True:
-     #       if row[0] != 'naam': #!# schrijft alleen als naam en wachtwoord er al staan #!#
-      #          writer.writerow( ('naam', 'wachtwoord') )
-       #         writer.writerow( (nLg, nPw) )
-        #    else:
-                writer.writerow( (nLg, nPw, nEmail, nProvider, nGender) )
-    f.close()
-    r.close()
+        if inUse == False and write == True:
+         #       if row[0] != 'naam': #!# schrijft alleen als naam en wachtwoord er al staan #!#
+          #          writer.writerow( ('naam', 'wachtwoord') )
+           #         writer.writerow( (nLg, nPw) )
+            #    else:
+                    writer.writerow( (nLg, nPw, nEmail, nProvider, nGender) )
+        f.close()
+        r.close()
+    except:
+        pass
+
     return inUse
 
 def print_filmnamen(film_dict):
@@ -124,11 +136,11 @@ def print_filmnamen(film_dict):
         #print('{} {}'.format(film['titel'], str(film['zender'])))
         #print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
-def kaartjeKopen(code): #code moet uit generateCode komen
+def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
     """Wijs unieke code toe en zet deze in csv bestand"""
     f = open('database.csv', 'a', newline = '')
     writer = csv.writer(f, delimiter = ',')
-    writer.writerow((code,)) #ticket ID toevoegen & film
+    writer.writerow((provider, film, username, code)) #ticket ID toevoegen & film
     f.close()
 
 def generateCode():
@@ -166,6 +178,7 @@ def codeInDb(code):
     else:
         print("De code komt niet voor in de database.")
     return inDb
+
 
 def clearFile(file): #naam van file bv clearFile('kluis.csv')
     """Maakt de csv file leeg"""
