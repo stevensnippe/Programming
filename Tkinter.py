@@ -28,7 +28,7 @@ def filmscreen():
     filmwindow.title("Chill-Flix")
     filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     filmwindow.configure(background=background)
-    names = ["kees", "philippe", "dylan"]
+    # names = ["kees", "philippe", "dylan"]
     button = {}
     buttonkopen = {}
     TB.schrijf_xml(TB.response)
@@ -39,21 +39,19 @@ def filmscreen():
 
 
     for i in filmNamen: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
-        lb = tk.Button(filmwindow, text=i + " (bekijk inhoud)", bg=background, fg=textkleur, command=lambda piet=i: filmdescription(piet))
+        lb = tk.Button(filmwindow, text=i + " (bekijk inhoud)", bg=background, activeforeground=activeforegroundbutton, activebackground= activebackgroundbutton, fg=textkleur, command=lambda piet=i: filmdescription(piet))
         button[i] = lb
         # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
-        button[i].grid(row=rij, column=5)
+        # button[i].grid(row=rij, column=0)
 
-
-    # for i in filmNamen: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
-        lb2 = tk.Button(filmwindow, text="Huren", bg=background, fg=textkleur, command=lambda piet=i: filmdescription(piet))
+        lb2 = tk.Button(filmwindow, text=i + " Huren", bg=background, activeforeground=activeforegroundbutton, activebackground= activebackgroundbutton, fg=textkleur, command=lambda piet=i: filmdescription(piet))
         buttonkopen[i] = lb2
         # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
-        button[i].grid(row=rij)
+        # button[i].grid(row=rij, column=1)
 
     # for i in filmNamen:
-    #     buttonkopen[i].pack(side="left")
-    #     button[i].pack(side="right")
+        buttonkopen[i].pack()
+        button[i].pack()
         rij += 1
 
 
@@ -255,6 +253,7 @@ def menu():
     global bsignup
     bsignup = tk.Button(window, text="Sign up", bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: newuser()))
 
+    baanvoerder = tk.Button(window, text="Aanvoerder?", bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: providerscreen()))
     bquit = tk.Button(window, text="Quit", bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: rommel.destroy() and window.destroy()))
     # hieronder staat de volgorde van de programma's
     w.pack(side="top")
@@ -266,7 +265,45 @@ def menu():
     attemptsLeft.pack()
     warning.pack()
     bsignup.pack(side="right")
+    baanvoerder.pack(side="left")
     bquit.pack(side="bottom")
     window.mainloop()
 
+def providerscreen():
+    window.destroy()
+    rommel.destroy()
+    provscreen = tk.Tk()
+    provscreen.geometry("310x300")
+    provscreen.title("Chill-Flix")
+    provscreen.wm_iconbitmap("favicon.ico")  # de logo van het programma
+    provscreen.configure(background=background)
+
+
+    button = {}
+    buttonkopen = {}
+    TB.schrijf_xml(TB.response)
+    TB.films_dict = TB.verwerk_xml()
+    filmNamen = TB.print_filmnamen(TB.films_dict) # filmNamen geeft alle huidige films in list
+    print(filmNamen) # print de list met alle filmnamen
+    rij=0
+
+    for i in filmNamen: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
+        lb = tk.Button(provscreen, text=i, bg=background, fg=textkleur, activeforeground=activeforegroundbutton, activebackground= activebackgroundbutton,command=lambda piet=i: huurdersfilm(piet))
+        button[i] = lb
+    # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
+    # button[i].grid(row=rij, column=0)
+
+
+
+# for i in filmNamen:
+        button[i].pack()
+        rij += 1
+
+
+
+    provscreen.mainloop()
+
+
+def huurdersfilm(piet):
+    pass
 menu()
