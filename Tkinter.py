@@ -191,7 +191,19 @@ def newuser():
 
     lprovider = tk.Label(newuserwindow, text="Provider", fg=textkleur, bg=background)
     global comboprovider
-    comboprovider = tk.ttk.Combobox(newuserwindow, values=["", "kpn", "ziggo", "fox", "xs4all"])
+    combostyle = tk.ttk.Style()
+
+    combostyle.theme_create('combostyle', parent='alt',
+                         settings = {'TCombobox':
+                                     {'configure':
+                                      {'selectbackground': background,
+                                       'fieldbackground': background,
+                                       'background': textkleur
+                                       }}}
+                         )
+# ATTENTION: this applies the new style 'combostyle' to all ttk.Combobox
+    combostyle.theme_use('combostyle')
+    comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["", "kpn", "ziggo", "fox", "xs4all"])
 
     makeaccount = tk.Button(newuserwindow, bg=activebackgroundbutton, fg=activeforegroundbutton,
                             activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
