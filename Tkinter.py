@@ -1,6 +1,7 @@
 import tkinter
 import tkinter.ttk
 import Thuisbioscoop as TB
+# import animateGifs as aG
 # from PIL import ImageTk, Image
 g=0
 tk = tkinter
@@ -22,25 +23,26 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 def logIn():
     if TB.loginPogingen > 0:
-        user = username.get()
+        user = username.get().lower()
         pw = password.get()
         accesGranted = TB.login(user, pw)
         # print(accesGranted)
         if accesGranted == True:
             # bron: http://stackoverflow.com/questions/10817917/how-to-disable-input-to-a-text-widget-but-allow-programatic-input
             print("[DEBUG] accesGranted was gelijk aan: "+str(accesGranted))
-            username.pack_forget() #hide field
-            password.pack_forget()
-            bsignin.pack_forget()
-            attemptsLeft.pack_forget()
-            label.pack_forget()
-            passlabel.pack_forget()
-            bsignup.pack_forget()
-            warning.pack_forget()
+            username.destroy() #hide field
+            password.destroy()
+            bsignin.destroy()
+            attemptsLeft.destroy()
+            label.destroy()
+            passlabel.destroy()
+            bsignup.destroy()
+            warning.destroy()
             window.configure(background="black")
             label2 = tk.Label(window, text='Login succesful, redirecting.', fg=textkleur, bg=background)
             label2.pack()
-            photo2 = tk.PhotoImage(file="loading.gif") # TODO:laad alleen eerste frame, is animated GIF
+            photo2 = tk.PhotoImage(file="loading.gif")
+            # TODO:laad alleen eerste frame, is animated GIF
             w = tk.Label(window, image=photo2, borderwidth="0")
             w.image = photo2
             w.pack()
@@ -65,9 +67,9 @@ def logIn():
 
 def createAccount():
     readyToWrite = False
-    user = ename.get()
+    user = ename.get().lower()
     pw = epassword.get()
-    email = eemail.get()
+    email = eemail.get().lower()
     provider = comboprovider.get()
     gender = ""
 
@@ -111,7 +113,7 @@ def newuser():
     rommel.destroy()
     newuserwindow = tkinter.Tk()
     newuserwindow.geometry(windowsize)
-    newuserwindow.title("Flexchill")
+    newuserwindow.title("Chill-Flex")
     newuserwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     newuserwindow.configure(background=background)
 
@@ -190,7 +192,7 @@ def menu():
     global passlabel
     passlabel = tk.Label(window, text="Password:", fg=textkleur, bg=background)
     global password
-    password = tk.Entry(window)
+    password = tk.Entry(window, show="*")
     global bsignin
     bsignin = tk.Button(window, text='Sign in', bg=activebackgroundbutton, fg=activeforegroundbutton, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton, highlightcolor=highlightbuttoncolorthingy, command=(lambda: logIn()))
     global attemptsLeft
