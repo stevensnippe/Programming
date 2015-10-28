@@ -94,7 +94,7 @@ def createAccount():
     pw = epassword.get()
     email = eemail.get().lower()
     provider = comboprovider.get()
-    gender = ""
+    gender = "M" # TODO: gender ophalen uit radiobutton
 
     # velden resetten naar defaultcolor white
     ename['bg'] = "white"
@@ -102,8 +102,7 @@ def createAccount():
     eemail['bg'] = "white"
     #comboprovider['bg'] = background
 
-    # if ("." and "@" in email) and provider != "":
-    inGebruik = TB.createLogin(user, pw, email, provider, g, False) # SCHRIJFT NIET -- laatste parameter geeft aan alleen data ophalen
+    inGebruik = TB.createLogin(user, pw, email, provider, gender, False) # SCHRIJFT NIET -- laatste parameter geeft aan alleen data ophalen
     print("login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(inGebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
 
     if inGebruik == False:
@@ -119,9 +118,9 @@ def createAccount():
         # TODO: Errortextlabel + verkeerde input roodmaken
 
     if inGebruik == False and readyToWrite == True:
-        TB.createLogin(user, pw, email, provider, g, True) # True dus schrijven naar login.csv
+        TB.createLogin(user, pw, email, provider, gender, True) # True dus schrijven naar login.csv
         inGebruik = True
-        print("DEBUG: Account created - "+str(g))
+        print("DEBUG: Account created - gender: "+str(gender))
         goback(1)
         # print("test"+radiogender1.selection_get())
         # TODO: maak redirect window naar login + errors uit goback(1) halen
