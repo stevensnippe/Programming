@@ -102,7 +102,6 @@ def createAccount():
     eemail['bg'] = "white"
     #comboprovider['bg'] = background
 
-    # if ("." and "@" in email) and provider != "":
     inGebruik = TB.createLogin(user, pw, email, provider, gender, False) # SCHRIJFT NIET -- laatste parameter geeft aan alleen data ophalen
     print("login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(inGebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
 
