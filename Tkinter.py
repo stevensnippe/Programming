@@ -1,6 +1,7 @@
 import tkinter
 import tkinter.ttk
 import Thuisbioscoop as TB
+import time
 # import animateGifs as aG
 # from PIL import ImageTk, Image
 g=0
@@ -21,6 +22,26 @@ global highlightbuttoncolorthingy
 highlightbuttoncolorthingy = "#6B99A0"
 
 
+def filmscreen():
+    time.sleep(5)
+    window.destroy()
+    rommel.destroy()
+    filmwindow = tkinter.Tk()
+    filmwindow.geometry(windowsize)
+    filmwindow.title("Chill-Flix")
+    filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
+    filmwindow.configure(background=background)
+    names = ["kees", "philippe", "dylan"]
+    label = {}
+    for i in names: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
+        lb = tk.Label(filmwindow, text=i)
+        label[i] = lb
+        label[i].pack()
+
+
+    filmwindow.mainloop()
+
+
 def logIn():
     if TB.loginPogingen > 0:
         user = username.get().lower()
@@ -30,7 +51,7 @@ def logIn():
         if accesGranted == True:
             # bron: http://stackoverflow.com/questions/10817917/how-to-disable-input-to-a-text-widget-but-allow-programatic-input
             print("[DEBUG] accesGranted was gelijk aan: "+str(accesGranted))
-            username.destroy() #hide field
+            username.destroy() #destroy window
             password.destroy()
             bsignin.destroy()
             attemptsLeft.destroy()
@@ -46,7 +67,10 @@ def logIn():
             w = tk.Label(window, image=photo2, borderwidth="0")
             w.image = photo2
             w.pack()
+
             #TODO: hier de code om naar het volgende scherm te gaan waar films worden gedisplayed (nieuwe def)
+
+            filmscreen()  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
             return True
         else:
             TB.loginPogingen -= 1
