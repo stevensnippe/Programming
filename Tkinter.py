@@ -53,6 +53,7 @@ def filmscreen():
         buttonkopen[i] = lb2
         # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         # button[i].grid(row=rij, column=1)
+        # voor de dynamische button breedte: http://stackoverflow.com/questions/873327/pythons-most-efficient-way-to-choose-longest-string-in-list
 
     # for i in filmnamen:
         buttonkopen[i].pack()  # TODO: een goede layout op het scherm krijgen (met .grid werkt column argument niet?)
@@ -315,5 +316,10 @@ def providerscreen():
 
 
 def huurdersfilm(film):
-    tk.messagebox.showinfo(film, film + ":\n" + "")  # TODO: de users van de bijbehorende film als tekst laten zien
+    useroverzicht = tk.Tk()
+    useroverzicht.geometry("310x300")
+    useroverzicht.title("Chill-Flix")
+    useroverzicht.wm_iconbitmap("favicon.ico")  # de logo van het programma
+    useroverzicht.configure(background=background)
+    # tk.messagebox.showinfo(film, film + ":\n" + "")  # TODO: de users van de bijbehorende film als tekst laten zien
 menu()
