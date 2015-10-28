@@ -160,20 +160,23 @@ def newuser():
     newuserwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     newuserwindow.configure(background=background)
 
-    lname = tk.Label(newuserwindow, text="Username:", fg=textkleur, bg=background)
-    global ename
-    ename = tk.Entry(newuserwindow)
-
     # g = tk.StringVar(g)
+
+    lemail = tk.Label(newuserwindow, text="Email:", fg=textkleur, bg=background)
+    global eemail
+    eemail = tk.Entry(newuserwindow)
+
     lgender = tk.Label(newuserwindow, text="Gender:", fg=textkleur, bg=background)
     global radiogender1
     radiogender1 = tk.Radiobutton(newuserwindow, text="Male", padx=20, variable=g, value="Male", fg=textkleur, bg=background)
     global radiogender2
     radiogender2 = tk.Radiobutton(newuserwindow, text="Female", padx=20, variable=g, value="Female", fg=textkleur, bg=background)
 
-    lemail = tk.Label(newuserwindow, text="Email:", fg=textkleur, bg=background)
-    global eemail
-    eemail = tk.Entry(newuserwindow)
+
+    lname = tk.Label(newuserwindow, text="Username:", fg=textkleur, bg=background)
+    global ename
+    ename = tk.Entry(newuserwindow)
+
 
     lpassword = tk.Label(newuserwindow, text="Password:", fg=textkleur, bg=background)
     global epassword
