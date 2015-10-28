@@ -31,7 +31,7 @@ def filmscreen():
     names = ["kees", "philippe", "dylan"]
     label = {}
     for i in names: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
-        lb = tk.Label(filmwindow, text=i)
+        lb = tk.Label(filmwindow, text=i, bg=background, fg=textkleur)
         label[i] = lb
         # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         label[i].pack()
