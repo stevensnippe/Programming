@@ -96,32 +96,42 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
     """Kijkt per regel van login.csv of de username matcht met invoer,
     is dit niet het geval dan word de nieuwe username met bijhorende
     password aan de database toegevoegt"""
+
+    inUse = True
     try:
-        inUse = True
         f = open('login.csv', 'a', newline = '\n')
         r = open('login.csv', 'r')
         writer = csv.writer(f, delimiter = ',')
         reader = csv.reader(r, delimiter = ',')
-        for row in reader:
-            if nLg == (row[0]):
-                print("Gebruikersnaam bestaat al.")
-                inUse = True
-                break
-            else:
-                inUse = False
-                continue
+    except FileNotFoundError:
+        w = open('login.csv', 'w', newline='')
+        writer = csv.writer(w, delimiter = ',')
+        writer.writerow( ("Username", "Password", "Email", "Provider", "Gender") )
+        writer.writerow( ("t", "t", "test@.", "ziggo", "M") )
+        w.close()
+        f = open('login.csv', 'a', newline = '\n')
+        r = open('login.csv', 'r')
+        writer = csv.writer(f, delimiter = ',')
+        reader = csv.reader(r, delimiter = ',')
 
-        if inUse == False and write == True:
-         #       if row[0] != 'naam': #!# schrijft alleen als naam en wachtwoord er al staan #!#
-          #          writer.writerow( ('naam', 'wachtwoord') )
-           #         writer.writerow( (nLg, nPw) )
-            #    else:
-                    writer.writerow( (nLg, nPw, nEmail, nProvider, nGender) )
-        f.close()
-        r.close()
-    except:
-        pass
+    for row in reader:
+        #print(row[0]) # DEBUG: print alle usernames
+        if nLg == (row[0]):
+            print("Gebruikersnaam bestaat al.")
+            inUse = True
+            break
+        else:
+            inUse = False
+            continue
 
+    if inUse == False and write == True:
+    #       if row[0] != 'naam': #!# schrijft alleen als naam en wachtwoord er al staan #!#
+    #          writer.writerow( ('naam', 'wachtwoord') )
+    #         writer.writerow( (nLg, nPw) )
+    #    else:
+        writer.writerow( (nLg, nPw, nEmail, nProvider, nGender) )
+    f.close()
+    r.close()
     return inUse
 
 def print_filmnamen(film_dict):
