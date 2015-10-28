@@ -17,6 +17,7 @@ Aan de parameter sorteer geeft je mee welke films je wilt ophalen. Dit is het ge
 key = "uqs9vygkf7zfbqokuvpekg4et6s1s9b3"
 datum = time.strftime("%d-%m-%Y")
 sorteer = 0
+global response
 response = requests.get('http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='+key+'&dag='+datum+'&sorteer='+str(sorteer))
 #print(response.text)
 
@@ -113,11 +114,13 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
 
 def print_filmnamen(film_dict):
     """Print alle films met bijhorende zender"""
+    fullString = []
     for film in film_dict['filmsoptv']['film']:
-        s = (film['titel']+" - "+str(film['zender'])) # de string
+        s = (film['titel']) # de string
         b = escapeXML(s) # escapes(replaces) characters &amp etc and makes new string
-        print(b)
-    return(b)
+        fullString.append(b)
+        #print(b)
+    return(fullString)
         #print('{} {}'.format(film['titel'], str(film['zender'])))
         #print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
