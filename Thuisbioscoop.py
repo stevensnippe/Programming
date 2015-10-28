@@ -61,6 +61,7 @@ def login(lg, pw):
         writer.writerow( ("test", "test", "test@.", "ziggo", "M") )
         w.close()
         r = open('login.csv', 'r')
+
     userLogins = {
 
     }
