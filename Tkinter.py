@@ -321,5 +321,14 @@ def huurdersfilm(film):
     useroverzicht.title("Chill-Flix")
     useroverzicht.wm_iconbitmap("favicon.ico")  # de logo van het programma
     useroverzicht.configure(background=background)
+    lfilm = tk.Label(useroverzicht, text=film + ":", fg=textkleur, bg=background)
+    lfilm.pack()
+    users = []  # TODO: hier komen de users van de film
+    for i in users:
+        lb = tk.Label(useroverzicht, text=i, fg=textkleur, bg=background)
+        label[i] = lb
+        label[i].pack()
+    lfilm.pack()
+    useroverzicht.mainloop()
     # tk.messagebox.showinfo(film, film + ":\n" + "")  # TODO: de users van de bijbehorende film als tekst laten zien
 menu()
