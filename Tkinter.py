@@ -5,7 +5,7 @@ import Thuisbioscoop as TB
 import time
 # import animateGifs as aG
 # from PIL import ImageTk, Image
-g=0
+g = 0
 tk = tkinter
 global background
 background = "#153341"
@@ -25,7 +25,7 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 def filmscreen():
     filmwindow = tkinter.Tk()
-    filmwindow.geometry(windowsize)
+    filmwindow.geometry("300x500")
     filmwindow.title("Chill-Flix")
     filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     filmwindow.configure(background=background)
@@ -41,14 +41,15 @@ def filmscreen():
     for i in filmnamen:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
         lb = tk.Button(filmwindow, text=i + " (bekijk inhoud)", bg=background, activeforeground=activeforegroundbutton,
                        activebackground=activebackgroundbutton,
-                       fg=textkleur, command=lambda piet=i: filmdescription(piet))
+                       fg=textkleur, width=17 + len(max(filmnamen, key=len)),
+                       command=lambda piet=i: filmdescription(piet))
         button[i] = lb
         # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         # button[i].grid(row=rij, column=0)
 
         lb2 = tk.Button(filmwindow, text=i + " Huren", bg=background, activeforeground=activeforegroundbutton,
                         activebackground=activebackgroundbutton,
-                        fg=textkleur, command=lambda piet=i: filmdescription(piet))
+                        fg=textkleur, width=7 + len(max(filmnamen, key=len)), command=lambda piet=i: filmdescription(piet))
         buttonkopen[i] = lb2
         # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         # button[i].grid(row=rij, column=1)
@@ -301,7 +302,8 @@ def providerscreen():
 
     for i in filmnamen:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
         lb = tk.Button(provscreen, text=i, bg=background, fg=textkleur, activeforeground=activeforegroundbutton,
-                       activebackground=activebackgroundbutton, command=lambda piet=i: huurdersfilm(piet))
+                       activebackground=activebackgroundbutton,
+                       width=len(max(filmnamen, key=len)), command=lambda piet=i: huurdersfilm(piet))
         button[i] = lb
     # button[i].grid(row=rij, column=0)
 
