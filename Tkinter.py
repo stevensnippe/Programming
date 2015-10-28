@@ -28,7 +28,7 @@ def logIn():
         # print(accesGranted)
         if accesGranted == True:
             # bron: http://stackoverflow.com/questions/10817917/how-to-disable-input-to-a-text-widget-but-allow-programatic-input
-            print("test")
+            print("[DEBUG] accesGranted was gelijk aan: "+str(accesGranted))
             username.pack_forget() #hide field
             password.pack_forget()
             bsignin.pack_forget()
@@ -37,6 +37,7 @@ def logIn():
             passlabel.pack_forget()
             bsignup.pack_forget()
             warning.pack_forget()
+            window.configure(background="black")
             label2 = tk.Label(window, text='Login succesful, redirecting.', fg=textkleur, bg=background)
             label2.pack()
             photo2 = tk.PhotoImage(file="loading.gif") # TODO:laad alleen eerste frame, is animated GIF
@@ -63,6 +64,7 @@ def logIn():
         return False
 
 def createAccount():
+    readyToWrite = False
     user = ename.get()
     pw = epassword.get()
     email = eemail.get()
@@ -76,15 +78,31 @@ def createAccount():
     #comboprovider['bg'] = background
 
     # if ("." and "@" in email) and provider != "":
-    inGebruik = TB.createLogin(user, pw, email, provider, "M") # return = True/False alleen gebaseerd op naam
+    inGebruik = TB.createLogin(user, pw, email, provider, "M", False) # SCHRIJFT NIET -- laatste parameter geeft aan alleen data ophalen
     print("login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(inGebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
-    if inGebruik == True:
+
+    if inGebruik == False:
+        readyToWrite = True
+
+    if ("." and "@" not in email):
+        eemail['bg'] = "red"
+        readyToWrite = False
+
+    if inGebruik == True: # inGebruik returnt inUse van createLogin
         ename['bg'] = "red"
+        readyToWrite = False
         # TODO: Errortextlabel + verkeerde input roodmaken
-    else:
-        pass
+
+    if inGebruik == False and readyToWrite == True:
+        TB.createLogin(user, pw, email, provider, "M", True) # True dus schrijven naar login.csv
+        inGebruik = True
+        print("DEBUG: Account created.")
+        goback(1)
         # print("test"+radiogender1.selection_get())
-        # TODO: goto redirect window of account creation
+        # TODO: maak redirect window naar login + errors uit goback(1) halen
+    return inGebruik
+
+
 
 def newuser():
     global newuserwindow

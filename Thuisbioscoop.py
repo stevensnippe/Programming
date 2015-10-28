@@ -83,7 +83,7 @@ def login(lg, pw):
         print(msg)
     return accesGranted
 
-def createLogin(nLg, nPw, nEmail, nProvider, nGender):
+def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
     """Kijkt per regel van login.csv of de username matcht met invoer,
     is dit niet het geval dan word de nieuwe username met bijhorende
     password aan de database toegevoegt"""
@@ -101,7 +101,7 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender):
             inUse = False
             continue
 
-    if inUse == False:
+    if inUse == False and write == True:
      #       if row[0] != 'naam': #!# schrijft alleen als naam en wachtwoord er al staan #!#
       #          writer.writerow( ('naam', 'wachtwoord') )
        #         writer.writerow( (nLg, nPw) )
