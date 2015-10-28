@@ -1,25 +1,24 @@
-import requests #get data from API
-import time     #get current date
-import tkinter  #draw interface
-import tkinter.messagebox
+import requests # get data from API
+import time     # get current date
+# import tkinter  # draw interface
+# import tkinter.messagebox
 import codecs
 import xmltodict
-import uuid     #genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420) - uuid.uuid4()
-import csv      #CSV bestand om unieke codes in op te slaan
-#import Tkinter  #Importeert Tkinter.py (GUI)
+import uuid     # genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420) - uuid.uuid4()
+import csv      # CSV bestand om unieke codes in op te slaan
+# import Tkinter  # Importeert Tkinter.py (GUI)
 loginPogingen = 5
 
-"""
-Aan de parameter key geeft je de eigen unieke API sleutel mee.
-Aan de parameter datum geeft je de datum mee geschreven als: 25-10-2015. Je kunt alleen een request doen naar de TV-films voor vandaag en morgen.
-Aan de parameter sorteer geeft je mee welke films je wilt ophalen. Dit is het getal 0, 1 of 2. Waar 0 staat voor: alle films, 1 staat voor: filmtips, 2 staat voor: 'film van de dag'.
-"""
+
+# Aan de parameter key geeft je de eigen unieke API sleutel mee.
 key = "uqs9vygkf7zfbqokuvpekg4et6s1s9b3"
+# Aan de parameter datum geeft je de datum mee geschreven als: 25-10-2015. Je kunt alleen een request doen naar de TV-films voor vandaag en morgen.
 datum = time.strftime("%d-%m-%Y")
+# Aan de parameter sorteer geeft je mee welke films je wilt ophalen. Dit is het getal 0, 1 of 2. Waar 0 staat voor: alle films, 1 staat voor: filmtips, 2 staat voor: 'film van de dag'.
 sorteer = 0
 global response
 response = requests.get('http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='+key+'&dag='+datum+'&sorteer='+str(sorteer))
-#print(response.text)
+# print(response.text)
 
 def schrijf_xml(reponse):
     """Schrijft de response in films.xml"""
@@ -34,7 +33,7 @@ def verwerk_xml():
     bestand.close()
     return xmltodict.parse(xml_string)
 
-#Na lang zoeken: http://www.stuffaboutcode.com/2012/06/python-encode-xml-escape-characters.html
+# Na lang zoeken: http://www.stuffaboutcode.com/2012/06/python-encode-xml-escape-characters.html
 def escapeXML(text):
     """De string die je erin doet word gefilterd van de onderstaande tags"""
     text = text.replace("&amp;", "&")
@@ -42,8 +41,8 @@ def escapeXML(text):
     text = text.replace("&apos;", "'")
     text = text.replace("&lt;", "<")
     text = text.replace("&gt;", ">")
-    text = text.replace("&eacute;", "e") #moet é zijn maar geeft raar teken
-    text = text.replace("&Eacute;", "e") #moet é zijn maar geeft raar teken (werkt mss in Tkinter)
+    text = text.replace("&eacute;", "e") # moet é zijn maar geeft raar teken
+    text = text.replace("&Eacute;", "e") # moet é zijn maar geeft raar teken (werkt mss in Tkinter)
     return text
 
 def login(lg, pw):
@@ -63,8 +62,8 @@ def login(lg, pw):
 
     }
     reader = csv.reader(r, delimiter = ',')
-    colum0 = [] #user
-    colum1 = [] #pw
+    colum0 = [] # user
+    colum1 = [] # pw
     for row in reader:
         for colum in reader:
             colum0.append(colum[0])
@@ -75,7 +74,7 @@ def login(lg, pw):
 
     for i in range(len(colum0)):
         userLogins[colum0[i]] = colum1[i]
-    #print(userLogins) #print hele dictionary voor test purpose
+    # print(userLogins) #print hele dictionary voor test purpose
     accesGranted = False
     if lg in colum0:
         if pw == userLogins[lg]:
@@ -115,7 +114,7 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
         reader = csv.reader(r, delimiter = ',')
 
     for row in reader:
-        #print(row[0]) # DEBUG: print alle usernames
+        # print(row[0]) # DEBUG: print alle usernames
         if nLg == (row[0]):
             print("Gebruikersnaam bestaat al.")
             inUse = True
@@ -125,10 +124,10 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
             continue
 
     if inUse == False and write == True:
-    #       if row[0] != 'naam': #!# schrijft alleen als naam en wachtwoord er al staan #!#
-    #          writer.writerow( ('naam', 'wachtwoord') )
-    #         writer.writerow( (nLg, nPw) )
-    #    else:
+    # if row[0] != 'naam': # TODO: schrijft alleen als naam en wachtwoord er al staan of file niet bestaat
+    # writer.writerow( ('naam', 'wachtwoord') )
+    # writer.writerow( (nLg, nPw) )
+    # else:
         writer.writerow( (nLg, nPw, nEmail, nProvider, nGender) )
     f.close()
     r.close()
@@ -141,10 +140,10 @@ def print_filmnamen(film_dict):
         s = (film['titel']) # de string
         b = escapeXML(s) # escapes(replaces) characters &amp etc and makes new string
         fullString.append(b)
-        #print(b)
+        # print(b)
     return(fullString)
-        #print('{} {}'.format(film['titel'], str(film['zender'])))
-        #print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
+        # print('{} {}'.format(film['titel'], str(film['zender'])))
+        # print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
 # def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
 def uuidNaarDb(code):
@@ -173,7 +172,7 @@ def generateCode():
         w.close()
         r = open('database.csv', 'r')
         reader = csv.reader(r, delimiter = ',')
-    inGebruik = []
+    inGebruik = [] # TODO: schrijf efficienter indien tijd over
     for row in reader:
         for colum in reader:
             inGebruik.append(colum[0])
@@ -198,7 +197,6 @@ def codeInDb(code):
 
     inDb = False
 
-
     for row in reader:
        if code == (row[0]):
            inDb = True
@@ -213,25 +211,25 @@ def codeInDb(code):
     return inDb
 
 
-def clearFile(file): #naam van file bv clearFile('kluis.csv')
+def clearFile(file): # naam van file bv clearFile('kluis.csv')
     """Maakt de csv file leeg"""
     clear = open(file, 'w')
     clear.close()
     print("De inhoud van "+str(file)+" is verwijdert.")
 
 
-################# EINDE DEF FUNCTIES ###########
+# EINDE DEF FUNCTIES - START UITVOER (# omdat dit gebeurt in tkinter)
 
 
-#clearFile #maakt gekozen file leeg
-#schrijf_xml(response) <
-#films_dict = verwerk_xml() <
-#print_filmnamen(films_dict)
+# clearFile #maakt gekozen file leeg
+# schrijf_xml(response) <
+# films_dict = verwerk_xml() <
+# print_filmnamen(films_dict)
 
-#print("\n") #witregel voor overzicht
-#code = generateCode()
-#uuidNaarDb(code) #kan alleen uitvoeren als variable(n) boven zijn declared
+# print("\n") #witregel voor overzicht
+# code = generateCode()
+# uuidNaarDb(code) #kan alleen uitvoeren als variable(n) boven zijn declared
 
-#login('steven','lol') #variablen hiervoor komen uit tkinter
-#createLogin('baksteen','lol') #login maken gebeurt in tkinter
-#codeInDb('96df784b-606a-4ede-8eae-e1b0cdc3169b')
+# login('steven','lol') #variablen hiervoor komen uit tkinter
+# createLogin('baksteen','lol') #login maken gebeurt in tkinter
+# codeInDb('96df784b-606a-4ede-8eae-e1b0cdc3169b')
