@@ -186,9 +186,18 @@ def generateCode():
 def codeInDb(code):
     """kijkt of de uuid4 in de database voorkomt
     gebeurt ook al in generate code maar dit is efficienter - laten staan voor geval dat"""
-    r = open('database.csv', 'r')
-    reader = csv.reader(r, delimiter = ',')
+    try:
+        r = open('database.csv', 'r')
+        reader = csv.reader(r, delimiter = ',')
+
+    except FileNotFoundError:
+        w = open('database.csv', 'w', newline='')
+        w.close()
+        r = open('database.csv', 'r')
+        reader = csv.reader(r, delimiter = ',')
+
     inDb = False
+
 
     for row in reader:
        if code == (row[0]):
@@ -206,7 +215,7 @@ def codeInDb(code):
 
 def clearFile(file): #naam van file bv clearFile('kluis.csv')
     """Maakt de csv file leeg"""
-    clear = open(file, 'w+')
+    clear = open(file, 'w')
     clear.close()
     print("De inhoud van "+str(file)+" is verwijdert.")
 
