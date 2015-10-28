@@ -46,4 +46,7 @@ def filmdescription(film):
 filmscreen()
 TB.schrijf_xml(TB.response)
 TB.films_dict = TB.verwerk_xml()
-TB.print_filmnamen(TB.films_dict)
+filmNamen = TB.print_filmnamen(TB.films_dict) # filmNamen geeft alle huidige films in list
+print(filmNamen) #print de list met alle filmnamen
+for i in filmNamen: #print films 1 voor 1
+    print(str(i))
