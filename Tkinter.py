@@ -1,5 +1,6 @@
 import tkinter
 import tkinter.ttk
+import tkinter.messagebox
 import Thuisbioscoop as TB
 import time
 # import animateGifs as aG
@@ -304,6 +305,6 @@ def providerscreen():
     provscreen.mainloop()
 
 
-def huurdersfilm(piet):
-    pass
+def huurdersfilm(film):
+    tk.messagebox.showinfo(film, film + ":\n" + "")
 menu()
