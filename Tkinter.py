@@ -54,8 +54,6 @@ def logIn():
             warning['text'] = "Login failed, invalid username or password."
             if TB.loginPogingen == 0:
                 warning['text'] = "Too many failed login attempts - wait 5 minutes."
-                #username['bg'] = "red"
-                #password['bg'] = "red"
                 username.configure(state="disabled")
                 password.configure(state="disabled")
                 bsignin.configure(state="disabled")
@@ -113,7 +111,7 @@ def newuser():
     rommel.destroy()
     newuserwindow = tkinter.Tk()
     newuserwindow.geometry(windowsize)
-    newuserwindow.title("Chill-Flex")
+    newuserwindow.title("Chill-Flix")
     newuserwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     newuserwindow.configure(background=background)
 
