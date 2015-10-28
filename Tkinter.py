@@ -23,7 +23,6 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 
 def filmscreen():
-    time.sleep(5)
     window.destroy()
     rommel.destroy()
     filmwindow = tkinter.Tk()
@@ -36,10 +35,15 @@ def filmscreen():
     for i in names: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
         lb = tk.Label(filmwindow, text=i)
         label[i] = lb
+        # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         label[i].pack()
 
 
     filmwindow.mainloop()
+
+
+def filmdescription(film):
+    print("hoi")
 
 
 def logIn():
@@ -69,7 +73,7 @@ def logIn():
             w.pack()
 
             #TODO: hier de code om naar het volgende scherm te gaan waar films worden gedisplayed (nieuwe def)
-
+            time.sleep(2)
             filmscreen()  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
             return True
         else:
