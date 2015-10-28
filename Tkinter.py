@@ -137,6 +137,10 @@ def createaccount():
         eemail['bg'] = "red"
         readytowrite = False
 
+    if ("," in user or email or provider or gender):
+        # print("DEBUG: Invalid character: , in input.")
+        readytowrite = False
+
     if ingebruik is True:  # ingebruik returnt inUse van createLogin
         ename['bg'] = "red"
         readytowrite = False
