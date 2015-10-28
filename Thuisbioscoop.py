@@ -146,32 +146,46 @@ def print_filmnamen(film_dict):
         #print('{} {}'.format(film['titel'], str(film['zender'])))
         #print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
-def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
-    """Wijs unieke code toe en zet deze in csv bestand"""
-    f = open('database.csv', 'a', newline = '')
-    writer = csv.writer(f, delimiter = ',')
-    writer.writerow((provider, film, username, code)) #ticket ID toevoegen & film
+# def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
+def uuidNaarDb(code):
+    """Zet unieke code uit generateCode() in database.csv"""
+    try:
+        f = open('database.csv', 'a', newline = '')
+        writer = csv.writer(f, delimiter = ',')
+    except FileNotFoundError:
+        w = open('database.csv', 'w', newline='')
+        w.close()
+        f = open('database.csv', 'a', newline = '')
+        writer = csv.writer(f, delimiter = ',')
+    # writer.writerow((provider, film, username, code))
+    writer.writerow((code,))
+    print("TEST - unieke code code aangemaakt: "+code)
     f.close()
 
 def generateCode():
     """Genereert een unieke code op basis van uuid4"""
     # UUID4: http://stackoverflow.com/questions/1210458/how-can-i-generate-a-unique-id-in-python
-    r = open('database.csv', 'r')
-    reader = csv.reader(r, delimiter = ',')
+    try:
+        r = open('database.csv', 'r')
+        reader = csv.reader(r, delimiter = ',')
+    except FileNotFoundError:
+        w = open('database.csv', 'w', newline='')
+        w.close()
+        r = open('database.csv', 'r')
+        reader = csv.reader(r, delimiter = ',')
     inGebruik = []
     for row in reader:
         for colum in reader:
             inGebruik.append(colum[0])
     code = str(uuid.uuid4())
     if code in inGebruik:
-        print("TEST: code was in gebruik - herhalen")
         generateCode()
     else:
-        print("TEST - unieke code code aangemaakt: "+code)
         return code
 
 def codeInDb(code):
-    """kijkt of de uuid4 in de database voorkomt"""
+    """kijkt of de uuid4 in de database voorkomt
+    gebeurt ook al in generate code maar dit is efficienter - laten staan voor geval dat"""
     r = open('database.csv', 'r')
     reader = csv.reader(r, delimiter = ',')
     inDb = False
@@ -207,7 +221,7 @@ def clearFile(file): #naam van file bv clearFile('kluis.csv')
 
 #print("\n") #witregel voor overzicht
 #code = generateCode()
-#kaartjeKopen(code) #kan alleen uitvoeren als variablen boven zijn declared
+#uuidNaarDb(code) #kan alleen uitvoeren als variable(n) boven zijn declared
 
 #login('steven','lol') #variablen hiervoor komen uit tkinter
 #createLogin('baksteen','lol') #login maken gebeurt in tkinter
