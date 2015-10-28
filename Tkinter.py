@@ -23,8 +23,6 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 
 def filmscreen():
-    window.destroy()
-    rommel.destroy()
     filmwindow = tkinter.Tk()
     filmwindow.geometry(windowsize)
     filmwindow.title("Chill-Flix")
@@ -71,10 +69,9 @@ def logIn():
             w = tk.Label(window, image=photo2, borderwidth="0")
             w.image = photo2
             w.pack()
-
+            # time.sleep(2)
             #TODO: hier de code om naar het volgende scherm te gaan waar films worden gedisplayed (nieuwe def)
-            time.sleep(2)
-            filmscreen()  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
+            #     goback(2)  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
             return True
         else:
             TB.loginPogingen -= 1
@@ -191,6 +188,12 @@ def goback(a):
         global newuserwindow
         newuserwindow.destroy()
         menu()
+    if a == 2:
+        global window
+        window.destroy()
+        rommel.destroy()
+        filmscreen()
+
 
 
 def menu():
