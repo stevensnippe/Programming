@@ -26,12 +26,14 @@ def schrijf_xml(reponse):
     bestand.write(str(response.text))
     bestand.close()
 
+
 def verwerk_xml():
     """Niet zeker van het nut van deze functie, laat staan later naar kijken"""
     bestand = open('films.xml', 'r')
     xml_string = bestand.read()
     bestand.close()
     return xmltodict.parse(xml_string)
+
 
 # Na lang zoeken: http://www.stuffaboutcode.com/2012/06/python-encode-xml-escape-characters.html
 def escapeXML(text):
@@ -44,6 +46,7 @@ def escapeXML(text):
     text = text.replace("&eacute;", "e") # moet é zijn maar geeft raar teken
     text = text.replace("&Eacute;", "e") # moet é zijn maar geeft raar teken (werkt mss in Tkinter)
     return text
+
 
 def login(lg, pw):
     """Extract de contents van login.csv naar een dictionary en 2 tuples,
@@ -74,8 +77,8 @@ def login(lg, pw):
 
     for i in range(len(colum0)):
         userLogins[colum0[i]] = colum1[i]
-    # print(userLogins) #print hele dictionary voor test purpose
-    accesGranted = False
+    # print(userLogins) # print hele dictionary voor test purpose
+    # accesGranted = False # variable not used
     if lg in colum0:
         if pw == userLogins[lg]:
             accesGranted = True
@@ -90,6 +93,7 @@ def login(lg, pw):
         msg = ("Login failed, invalid username.")
         print(msg)
     return accesGranted
+
 
 def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
     """Kijkt per regel van login.csv of de username matcht met invoer,
@@ -133,6 +137,7 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
     r.close()
     return inUse
 
+
 def print_filmnamen(film_dict):
     """Print alle films met bijhorende zender"""
     fullString = []
@@ -144,6 +149,7 @@ def print_filmnamen(film_dict):
     return(fullString)
         # print('{} {}'.format(film['titel'], str(film['zender'])))
         # print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
+
 
 # def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
 def uuidNaarDb(code):
@@ -161,6 +167,7 @@ def uuidNaarDb(code):
     print("TEST - unieke code code aangemaakt: "+code)
     f.close()
 
+
 def generateCode():
     """Genereert een unieke code op basis van uuid4"""
     # UUID4: http://stackoverflow.com/questions/1210458/how-can-i-generate-a-unique-id-in-python
@@ -176,11 +183,13 @@ def generateCode():
     for row in reader:
         for colum in reader:
             inGebruik.append(colum[0])
+    r.close()
     code = str(uuid.uuid4())
     if code in inGebruik:
         generateCode()
     else:
         return code
+
 
 def codeInDb(code):
     """kijkt of de uuid4 in de database voorkomt
@@ -204,6 +213,7 @@ def codeInDb(code):
        else:
            inDb = False
            continue
+    r.close()
     if inDb == True:
         print("De code komt voor in de database.")
     else:
