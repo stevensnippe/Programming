@@ -30,16 +30,32 @@ def filmscreen():
     filmwindow.configure(background=background)
     names = ["kees", "philippe", "dylan"]
     button = {}
+    buttonkopen = {}
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     filmNamen = TB.print_filmnamen(TB.films_dict) # filmNamen geeft alle huidige films in list
     print(filmNamen) # print de list met alle filmnamen
+    rij=0
+
 
     for i in filmNamen: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
-        lb = tk.Button(filmwindow, text=i, bg=background, fg=textkleur, command=lambda piet=i: filmdescription(piet))
+        lb = tk.Button(filmwindow, text=i + " (bekijk inhoud)", bg=background, fg=textkleur, command=lambda piet=i: filmdescription(piet))
         button[i] = lb
         # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
-        button[i].pack()
+        button[i].grid(row=rij, column=5)
+
+
+    # for i in filmNamen: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
+        lb2 = tk.Button(filmwindow, text="Huren", bg=background, fg=textkleur, command=lambda piet=i: filmdescription(piet))
+        buttonkopen[i] = lb2
+        # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
+        button[i].grid(row=rij)
+
+    # for i in filmNamen:
+    #     buttonkopen[i].pack(side="left")
+    #     button[i].pack(side="right")
+        rij += 1
+
 
 
     filmwindow.mainloop()
