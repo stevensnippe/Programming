@@ -29,12 +29,12 @@ def filmscreen():
     filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     filmwindow.configure(background=background)
     names = ["kees", "philippe", "dylan"]
-    label = {}
+    button = {}
     for i in names: # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
-        lb = tk.Label(filmwindow, text=i, bg=background, fg=textkleur)
-        label[i] = lb
+        lb = tk.Button(filmwindow, text=i, bg=background, fg=textkleur, command=(lambda: filmdescription(i)))
+        button[i] = lb
         # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
-        label[i].pack()
+        button[i].pack()
 
 
     filmwindow.mainloop()
@@ -71,7 +71,7 @@ def logIn():
             w.pack()
             # time.sleep(2)
             #TODO: hier de code om naar het volgende scherm te gaan waar films worden gedisplayed (nieuwe def)
-            #     goback(2)  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
+            goback(2)  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
             return True
         else:
             TB.loginPogingen -= 1
@@ -209,6 +209,7 @@ def menu():
     window.title("Chill-Flix")
     window.wm_iconbitmap("favicon.ico")  # de logo van het programma
     window.configure(background=background)
+    # window.protocol('WM_DELETE_WINDOW', rommel.destroy() and window.destroy()) # http://stackoverflow.com/questions/3295270/overriding-tkinter-x-button-control-the-button-that-close-the-window
     global photo
     photo = tk.PhotoImage(file="deze.gif")
     w = tk.Label(window, image=photo, borderwidth="0")
