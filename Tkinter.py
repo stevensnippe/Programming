@@ -177,7 +177,7 @@ def menu():
     window = tkinter.Toplevel()
     #TODO: defaultcloseoperation (stoppen met runnen bij kruisje)
     window.geometry("310x300")
-    window.title("Flexchill")
+    window.title("Chill-Flix")
     window.wm_iconbitmap("favicon.ico")  # de logo van het programma
     window.configure(background=background)
     global photo
