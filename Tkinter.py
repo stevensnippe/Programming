@@ -147,6 +147,7 @@ def login():
         return False
 
 
+
 def createaccount():
     """
     checkt de account creation input voor invalide tekst
@@ -290,6 +291,7 @@ def newuser():
 
 def goback(a):
     if a == 1:
+        newuserwindow.eval('::ttk::CancelRepeat') # Bron: http://stackoverflow.com/questions/15448914/python-tkinter-ttk-combobox-throws-exception-on-quit
         newuserwindow.destroy()
         menu()
     if a == 2:
