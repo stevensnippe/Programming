@@ -24,9 +24,9 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 
 def filmscreen():
-    """"
-
-    """"
+    """
+    test
+    """
     global filmwindow
     filmwindow = tkinter.Tk()
     filmwindow.geometry("300x500")
@@ -206,12 +206,12 @@ def newuser():
     global comboprovider
     global combostyle
     combostyle = tk.ttk.Style()
-
+# http://stackoverflow.com/questions/27912250/how-to-set-the-background-color-of-a-ttk-combobox
     combostyle.theme_create('regular', parent='alt',
                          settings = {'TCombobox':
                                      {'configure':
-                                      {'selectbackground': 'white',
-                                       'fieldbackground': 'white',
+                                      {'selectbackground': activebackgroundbutton,
+                                       'fieldbackground': activebackgroundbutton,
                                        'background': textkleur,
     #                                    TODO: textkleur moet zwart zijn
                                        }}}
