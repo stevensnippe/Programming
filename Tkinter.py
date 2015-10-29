@@ -69,6 +69,7 @@ def filmdescription(film):
 
 def login():
     if TB.loginPogingen > 0:
+        global user
         user = username.get().lower()
         pw = password.get()
         accesgranted = TB.login(user, pw)
