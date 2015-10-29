@@ -40,6 +40,7 @@ def escapeXML(text):
     """De string die je erin doet word gefilterd van de onderstaande tags"""
     text = text.replace("&amp;", "&")
     text = text.replace("&quot;", "\"")
+    text = text.replace("&icirc;", "i") # moet î [rare i] zijn maar geeft raar teken
     text = text.replace("&apos;", "'")
     text = text.replace("&lt;", "<")
     text = text.replace("&gt;", ">")
