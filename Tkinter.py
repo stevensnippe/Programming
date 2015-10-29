@@ -55,7 +55,7 @@ def filmscreen():
 
         lb2 = tk.Button(filmwindow, text=(i + " Huren"), bg=background, activeforeground=activeforegroundbutton,
                         activebackground=activebackgroundbutton,
-                        fg=textkleur, width=7 + len(max(filmnamen["titel"], key=len)), command=lambda piet=i: filmdescription(piet))
+                        fg=textkleur, width=7 + len(max(filmnamen["titel"], key=len)), command=lambda piet=i: filmhuren(piet))
         buttonkopen[i] = lb2
         # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         buttonkopen[i].grid(row=rij, column=1)
@@ -78,6 +78,16 @@ def filmdescription(film):
     webbrowser.open(str(filmnamen["tv_link"][filmnummer]))
     print(str(filmnamen["tv_link"][filmnummer]))
     print("hoi " + str(filmnummer))
+
+
+def filmhuren(film):
+    # for i in filmnamen['titel']:
+        filmnummer = filmnamen["titel"].index(film)
+        t = (str(filmnamen["titel"][filmnummer]))
+        p = (str(filmnamen["provider"][filmnummer]))
+        print(TB.gebruiker)
+        TB.kaartjeKopen(p, t, TB.gebruiker, TB.generateCode())
+
 
 
 def login():
@@ -357,13 +367,6 @@ def providerscreen():
     }
     # print(filmnamen)  # print de dictionaries met alle filmnamen
     rij = 0
-    for i in filmnamen['titel']:
-            filmnummer = filmnamen["titel"].index(i)
-            t = (str(filmnamen["titel"][filmnummer]))
-            p = (str(filmnamen["provider"][filmnummer]))
-            print(TB.gebruiker)
-            TB.kaartjeKopen(p, t, TB.gebruiker, TB.generateCode())
-
 
 
     for i in filmnamen['titel']:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
