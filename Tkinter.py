@@ -203,7 +203,8 @@ def newuser():
                                      {'configure':
                                       {'selectbackground': 'white',
                                        'fieldbackground': 'white',
-                                       'background': textkleur
+                                       'background': textkleur,
+                                       # TODO: textkleur moet zwart zijn
                                        }}}
                          )
     combostyle.theme_create('red', parent='alt',
