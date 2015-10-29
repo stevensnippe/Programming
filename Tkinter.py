@@ -46,24 +46,24 @@ def filmscreen():
                        command=lambda piet=i: filmdescription(piet))
         button[i] = lb
         # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
-        # button[i].grid(row=rij, column=0)
+        button[i].grid(row=rij, column=0)
 
         lb2 = tk.Button(filmwindow, text=i + " Huren", bg=background, activeforeground=activeforegroundbutton,
                         activebackground=activebackgroundbutton,
                         fg=textkleur, width=7 + len(max(filmnamen, key=len)), command=lambda piet=i: filmdescription(piet))
         buttonkopen[i] = lb2
         # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
-        # button[i].grid(row=rij, column=1)
+        buttonkopen[i].grid(row=rij, column=1)
         # voor de dynamische button breedte: http://stackoverflow.com/questions/873327/pythons-most-efficient-way-to-choose-longest-string-in-list
 
     # for i in filmnamen:
-        buttonkopen[i].pack()  # TODO: een goede layout op het scherm krijgen (met .grid werkt column argument niet?)
-        button[i].pack()
+    #     buttonkopen[i].pack()  # TODO: een goede layout op het scherm krijgen (met .grid werkt column argument niet?)
+    #     button[i].pack()
         rij += 1
 
     bgoback = tk.Button(filmwindow, text="Go Back", command=lambda: goback(3), bg=background,
                         fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
-    bgoback.pack(side="left")
+    bgoback.grid(row=(rij + 1), column=0)
 
     filmwindow.mainloop()
 
@@ -210,7 +210,7 @@ def newuser():
                                       {'selectbackground': 'white',
                                        'fieldbackground': 'white',
                                        'background': textkleur,
-                                       # TODO: textkleur moet zwart zijn
+    #                                    TODO: textkleur moet zwart zijn
                                        }}}
                          )
     combostyle.theme_create('red', parent='alt',
@@ -222,8 +222,8 @@ def newuser():
                                        }}}
                          )
 # ATTENTION: this applies the new style 'combostyle' to all ttk.Combobox
-    combostyle.theme_use('combostyle')
-    comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["nothing", "kpn", "ziggo", "fox", "xs4all"])
+#     combostyle.theme_use('combostyle')
+#     comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["nothing", "kpn", "ziggo", "fox", "xs4all"])
     combostyle.theme_use('regular')
     comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["", "kpn", "ziggo", "fox", "xs4all"])
 
