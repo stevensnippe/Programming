@@ -88,6 +88,7 @@ def login():
         accesgranted = TB.login(user, pw)
         # print(accesgranted)
         if accesgranted is True:
+            TB.gebruiker = user
             # bron: http://stackoverflow.com/questions/10817917/how-to-disable-input-to-a-text-widget-but-allow-programatic-input
             print("[DEBUG] accesgranted was gelijk aan: "+str(accesgranted))
             username.destroy()  # destroy window
@@ -360,8 +361,8 @@ def providerscreen():
             filmnummer = filmnamen["titel"].index(i)
             t = (str(filmnamen["titel"][filmnummer]))
             p = (str(filmnamen["provider"][filmnummer]))
-            print(user)
-            #TB.kaartjeKopen(p, t, user)
+            print(TB.gebruiker)
+            TB.kaartjeKopen(p, t, TB.gebruiker)
 
 
 
