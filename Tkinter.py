@@ -24,6 +24,7 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 
 def filmscreen():
+    global filmwindow
     filmwindow = tkinter.Tk()
     filmwindow.geometry("300x500")
     filmwindow.title("Chill-Flix")
@@ -59,6 +60,10 @@ def filmscreen():
         buttonkopen[i].pack()  # TODO: een goede layout op het scherm krijgen (met .grid werkt column argument niet?)
         button[i].pack()
         rij += 1
+
+    bgoback = tk.Button(filmwindow, text="Go Back", command=lambda: goback(3), bg=background,
+                        fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
+    bgoback.pack(side="left")
 
     filmwindow.mainloop()
 
@@ -203,7 +208,7 @@ def newuser():
                          )
 # ATTENTION: this applies the new style 'combostyle' to all ttk.Combobox
     combostyle.theme_use('combostyle')
-    comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["", "kpn", "ziggo", "fox", "xs4all"])
+    comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["nothing", "kpn", "ziggo", "fox", "xs4all"])
 
     makeaccount = tk.Button(newuserwindow, bg=activebackgroundbutton, fg=activeforegroundbutton,
                             activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
@@ -232,13 +237,18 @@ def newuser():
 
 def goback(a):
     if a == 1:
-        global newuserwindow
         newuserwindow.destroy()
         menu()
     if a == 2:
         window.destroy()
         rommel.destroy()
         filmscreen()
+    if a == 3:
+        filmwindow.destroy()
+        menu()
+    if a == 4:
+        provscreen.destroy()
+        menu()
 
 
 def menu():
@@ -304,6 +314,7 @@ def menu():
 def providerscreen():
     window.destroy()
     rommel.destroy()
+    global provscreen
     provscreen = tk.Tk()
     provscreen.geometry("310x300")
     provscreen.title("Chill-Flix")
@@ -328,6 +339,8 @@ def providerscreen():
         button[i].pack()
         rij += 1
 
+    bgoback = tk.Button(provscreen, text="Go Back", command=lambda: goback(4), bg=background, fg=textkleur, activeforeground=activeforegroundbutton, activebackground=activebackgroundbutton)
+    bgoback.pack(side="left")
     provscreen.mainloop()
 
 
@@ -345,6 +358,10 @@ def huurdersfilm(film):
         lb3 = tk.Label(useroverzicht, text=i, fg=textkleur, bg=background)
         userlabel[i] = lb3
         userlabel[i].pack()
+
+    bgoback = tk.Button(useroverzicht, text="Go Back", command=lambda: useroverzicht.destroy(), bg=background, fg=textkleur, activeforeground=activeforegroundbutton, activebackground=activebackgroundbutton)
+    bgoback.pack()
+
     useroverzicht.mainloop()
     # tk.messagebox.showinfo(film, film + ":\n" + "")  # TODO: de users van de bijbehorende film als tekst laten zien
 menu()
