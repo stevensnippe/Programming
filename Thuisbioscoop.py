@@ -23,7 +23,8 @@ response = requests.get('http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='+key
 # print(response.text)
 
 def schrijf_xml(reponse):
-    """Schrijft de response in films.xml"""
+    """Schrijft de response in films.xml
+    geen failsafe bij openen want w dus word aangemaakt indien niet aanwezig"""
     bestand = codecs.open('films.xml', "w", "iso-8859-1")
     bestand.write(str(response.text))
     bestand.close()
@@ -37,9 +38,9 @@ def verwerk_xml():
     return xmltodict.parse(xml_string)
 
 
-# Na lang zoeken: http://www.stuffaboutcode.com/2012/06/python-encode-xml-escape-characters.html
 def escapeXML(text):
-    """De string die je erin doet word gefilterd van de onderstaande tags"""
+    """Replace character in string [bv: &amp --> &]
+    bron: http://www.stuffaboutcode.com/2012/06/python-encode-xml-escape-characters.html"""
     text = text.replace("&amp;", "&")
     text = text.replace("&quot;", "\"")
     text = text.replace("&icirc;", "i") # moet î [rare i] zijn maar geeft raar teken
@@ -50,8 +51,8 @@ def escapeXML(text):
     text = text.replace("&Eacute;", "e") # moet é zijn maar geeft raar teken (werkt mss in Tkinter)
     return text
 
-def deEscapeXML(text): # zal enkele problemen met zich mee brengen
-    """De string die je erin doet word gefilterd van de onderstaande tags"""
+def deEscapeXML(text): # besloten niet te gebruik
+    """Replace character in string [bv: & --> &amp]"""
     text = text.replace("&", "&amp;")
     text = text.replace("\"", "&quot;")
     text = text.replace("i", "&icirc;") # moet î [rare i] zijn maar geeft raar teken
@@ -113,10 +114,9 @@ def login(lg, pw):
 
 
 def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
-    """Kijkt per regel van login.csv of de username matcht met invoer,
-    is dit niet het geval dan word de nieuwe username met bijhorende
-    password aan de database toegevoegt"""
-
+    """Probeert username, password, email, provider en gender naar
+    login.csv te schrijven, write staat voor schrijven naar login.csv True of False
+    ivm het ophalen van data zonder te schrijven. Failsafe als er login.csv niet bestaat"""
     inUse = True
     try:
         f = open('login.csv', 'a', newline = '\n')
@@ -156,7 +156,10 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
 
 
 def print_filmnamen(film_dict):
-    """Print alle films met bijhorende zender"""
+    """Zet alle titels, providers, tv_links in lists nadat deze zijn
+    gefiltert van characters die we niet willen (zie escapeXML).
+    Hierna word een dictionary gemaakt uit de 3 lists en deze word
+    gereturnt"""
     fullString = []
     fullString1 = []
     fullString2 = []
@@ -183,7 +186,8 @@ def print_filmnamen(film_dict):
 
 def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
 # def uuidNaarDb(code):
-    """Zet unieke code uit generateCode() in database.csv"""
+    """Zet unieke code uit generateCode() in database.csv + failsafe indien
+    database.csv niet bestaat."""
     try:
         f = open('database.csv', 'a', newline = '')
         writer = csv.writer(f, delimiter = ',')
@@ -194,12 +198,12 @@ def kaartjeKopen(provider, film, username, code): #code moet uit generateCode ko
         writer = csv.writer(f, delimiter = ',')
     writer.writerow((provider, film, username, code))
     # writer.writerow((code,))
-    print("TEST - unieke code code aangemaakt")
+    print("TEST - unieke code code aangemaakt: "+code)
     f.close()
 
 
 def generateCode():
-    """Genereert een unieke code op basis van uuid4"""
+    """Genereert een unieke code op basis van uuid4 en returnt deze, failsafe als code bestaat"""
     # UUID4: http://stackoverflow.com/questions/1210458/how-can-i-generate-a-unique-id-in-python
     try:
         r = open('database.csv', 'r')
