@@ -1,3 +1,7 @@
-naam,wachtwoord,email,provider,geslacht
-testt,test,s@s.com,kpn,M
-s,s,steven.snippe@student.hu.nl,kpn,M
+Username,Password,Email,Provider,Gender
+test,test,test@.,ziggo,M
+steven,lol,@.,kpn,M
+sdafasdff,sadfasdfasdf,@.,kpn,M
+s,s,s@.,kpn,M
+sdafasdfasdf,asdfasdf,s@.,ziggo,M
+sadfasdgsadf,asdfasdf,@.,kpn,M

@@ -74,6 +74,7 @@ def filmdescription(film):
 
 def login():
     if TB.loginPogingen > 0:
+        global user
         user = username.get().lower()
         pw = password.get()
         accesgranted = TB.login(user, pw)
@@ -129,7 +130,7 @@ def createaccount():
     ename['bg'] = "white"
     epassword['bg'] = "white"
     eemail['bg'] = "white"
-    # comboprovider['bg'] = background
+    combostyle.theme_use('regular')
 
     ingebruik = TB.createLogin(user, pw, email, provider, gender, False)
     # ^SCHRIJFT NIET -- laatste parameter geeft aan alleen data ophalen
@@ -138,15 +139,19 @@ def createaccount():
     if ingebruik is False:
         readytowrite = True
 
-    if ("." and "@" not in email):
+    if ("." and "@" not in email) or ("," in email): # or (len(pw) < 5):
         eemail['bg'] = "red"
         readytowrite = False
 
-    if ("," in user or email or provider or gender):
-        # print("DEBUG: Invalid character: , in input.")
+    if ("," in pw) or (pw == ""): # or (len(pw) < 4):
+        epassword['bg'] = "red"
         readytowrite = False
 
-    if ingebruik is True:  # ingebruik returnt inUse van createLogin
+    if (provider == "") or ("," in provider):
+        combostyle.theme_use('red')
+        readytowrite = False
+
+    if (ingebruik is True) or (user == "") or ("," in user):  # ingebruik returnt inUse van createLogin
         ename['bg'] = "red"
         readytowrite = False
         # TODO: Errortextlabel + verkeerde input roodmaken
@@ -196,19 +201,31 @@ def newuser():
 
     lprovider = tk.Label(newuserwindow, text="Provider", fg=textkleur, bg=background)
     global comboprovider
+    global combostyle
     combostyle = tk.ttk.Style()
 
-    combostyle.theme_create('combostyle', parent='alt',
+    combostyle.theme_create('regular', parent='alt',
                          settings = {'TCombobox':
                                      {'configure':
-                                      {'selectbackground': background,
-                                       'fieldbackground': background,
+                                      {'selectbackground': 'white',
+                                       'fieldbackground': 'white',
+                                       'background': textkleur,
+                                       # TODO: textkleur moet zwart zijn
+                                       }}}
+                         )
+    combostyle.theme_create('red', parent='alt',
+                         settings = {'TCombobox':
+                                     {'configure':
+                                      {'selectbackground': 'red',
+                                       'fieldbackground': 'red',
                                        'background': textkleur
                                        }}}
                          )
 # ATTENTION: this applies the new style 'combostyle' to all ttk.Combobox
     combostyle.theme_use('combostyle')
     comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["nothing", "kpn", "ziggo", "fox", "xs4all"])
+    combostyle.theme_use('regular')
+    comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["", "kpn", "ziggo", "fox", "xs4all"])
 
     makeaccount = tk.Button(newuserwindow, bg=activebackgroundbutton, fg=activeforegroundbutton,
                             activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,

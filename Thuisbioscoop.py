@@ -40,11 +40,23 @@ def escapeXML(text):
     """De string die je erin doet word gefilterd van de onderstaande tags"""
     text = text.replace("&amp;", "&")
     text = text.replace("&quot;", "\"")
+    text = text.replace("&icirc;", "i") # moet î [rare i] zijn maar geeft raar teken
     text = text.replace("&apos;", "'")
     text = text.replace("&lt;", "<")
     text = text.replace("&gt;", ">")
     text = text.replace("&eacute;", "e") # moet é zijn maar geeft raar teken
     text = text.replace("&Eacute;", "e") # moet é zijn maar geeft raar teken (werkt mss in Tkinter)
+    return text
+
+def deEscapeXML(text): # zal enkele problemen met zich mee brengen
+    """De string die je erin doet word gefilterd van de onderstaande tags"""
+    text = text.replace("&", "&amp;")
+    text = text.replace("\"", "&quot;")
+    text = text.replace("i", "&icirc;") # moet î [rare i] zijn maar geeft raar teken
+    text = text.replace("'", "&apos;")
+    text = text.replace("<", "&lt;")
+    text = text.replace(">", "&gt;")
+    text = text.replace("e", "&eacute;") # moet é zijn maar geeft raar teken
     return text
 
 
@@ -152,8 +164,8 @@ def print_filmnamen(film_dict):
         # print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
 
-# def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
-def uuidNaarDb(code):
+def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
+# def uuidNaarDb(code):
     """Zet unieke code uit generateCode() in database.csv"""
     try:
         f = open('database.csv', 'a', newline = '')
@@ -163,8 +175,8 @@ def uuidNaarDb(code):
         w.close()
         f = open('database.csv', 'a', newline = '')
         writer = csv.writer(f, delimiter = ',')
-    # writer.writerow((provider, film, username, code))
-    writer.writerow((code,))
+    writer.writerow((provider, film, username, code))
+    # writer.writerow((code,))
     print("TEST - unieke code code aangemaakt: "+code)
     f.close()
 
