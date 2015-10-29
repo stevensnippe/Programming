@@ -26,7 +26,7 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 def filmscreen():
     """
-    test
+    Laat alle films zien d.m.v. dynamic buttons, hier kan je naar de site gaan of een film huren
     """
     global filmwindow
     filmwindow = tkinter.Tk()
@@ -74,14 +74,17 @@ def filmscreen():
 
 
 def filmdescription(film):
+    """
+    zoekt bij een bepaalde titel de bijbehorende url en opent deze in de default browser
+    """
     filmnummer = filmnamen["titel"].index(film)
     webbrowser.open(str(filmnamen["tv_link"][filmnummer]))
     print(str(filmnamen["tv_link"][filmnummer]))
-    print("hoi " + str(filmnummer))
+    # print("hoi " + str(filmnummer))  # werd gebruikt om te testen of de index werkte
 
 
 def filmhuren(film):
-    # for i in filmnamen['titel']:
+    # for i in filmnamen['titel']:  # niet gebruiken, zorgt voor een unieke code
     filmnummer = filmnamen["titel"].index(film)
     t = (str(filmnamen["titel"][filmnummer]))
     p = (str(filmnamen["provider"][filmnummer]))
@@ -92,6 +95,9 @@ def filmhuren(film):
 
 
 def login():
+    """
+    checkt de login met de database
+    """
     if TB.loginPogingen > 0:
         global user
         user = username.get().lower()
@@ -132,6 +138,9 @@ def login():
                 password.configure(state="disabled")
                 bsignin.configure(state="disabled")
                 photo.configure(file="blocked.gif")  # kan wel beter dan dit maar het idee is er
+                # username.after(1000,username.configure(state="normal"))  # voor extra tijd: zorgen dat na 5 minuten de inlog ook weer werkt
+                # password.after(1000,password.configure(state="normal"))
+                # bsignin.after(1000, bsignin.configure(state="normal"))
             return False
     else:
         warning['text'] = "Too many failed login attempts - wait 5 minutes."
@@ -139,6 +148,9 @@ def login():
 
 
 def createaccount():
+    """
+    checkt de account creation input voor invalide tekst
+    """
     readytowrite = False
     user = ename.get().lower()
     pw = epassword.get()
@@ -187,6 +199,9 @@ def createaccount():
 
 
 def newuser():
+    """
+    Dit is het scherm waarin men een account kan creëren
+    """
     global newuserwindow
     global g
     window.destroy()
@@ -291,7 +306,9 @@ def goback(a):
 
 def menu():
     """
-   Let op! programma sluit pas echt af als je op quit drukt"""
+   het allereerste scherm waarin men kan inloggen of naar een andere scherm kan gaan
+   Let op! programma sluit pas echt af als je op quit drukt vanwegen de window: rommel
+   """
     global window
     global rommel
     rommel = tkinter.Tk()  # houd een tweede scherm tegen
@@ -350,6 +367,9 @@ def menu():
 
 
 def providerscreen():
+    """
+
+    """
     window.destroy()
     rommel.destroy()
     global provscreen
