@@ -241,7 +241,7 @@ def codeInDb(code):
     inDb = False
 
     for row in reader:
-       if code == (row[0]):
+       if code == (row[3]):
            inDb = True
            break
        else:
@@ -254,6 +254,27 @@ def codeInDb(code):
         print("De code komt niet voor in de database.")
     return inDb
 
+def aanbiederInfo(filmnaamhier):
+    """zoekt de gebruikersnamen bij de ingegeven filmnaam en return deze in een list
+    + failsafe als database.csv niet bestaat"""
+    try:
+        r = open('database.csv', 'r')
+        reader = csv.reader(r, delimiter = ',')
+
+    except FileNotFoundError:
+        w = open('database.csv', 'w', newline='')
+        w.close()
+        r = open('database.csv', 'r')
+        reader = csv.reader(r, delimiter = ',')
+
+    ingebruikdoor = []
+    for row in reader:
+        if filmnaamhier == (row[1]):
+            ingebruikdoor.append(row[2])
+        continue
+    print("DEBUG - ingebruik door: "+str(ingebruikdoor))
+    r.close()
+    return ingebruikdoor
 
 def clearFile(file): # naam van file bv clearFile('kluis.csv')
     """Maakt de csv file leeg"""
@@ -264,7 +285,7 @@ def clearFile(file): # naam van file bv clearFile('kluis.csv')
 
 # EINDE DEF FUNCTIES - START UITVOER (# omdat dit gebeurt in tkinter)
 
-
+# aanbiederInfo('Die goldene Gans')
 # clearFile #maakt gekozen file leeg
 # schrijf_xml(response)
 # films_dict = verwerk_xml()
