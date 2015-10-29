@@ -167,10 +167,10 @@ def print_filmnamen(film_dict):
         fullString1.append(c)
         fullString2.append(d)
         dictionary = {
-            'titel':fullString,
-            'provider':fullString1,
-            'tv_link':fullString2
-        } # titel, provider, tv_link
+            'titel':fullString, # titel
+            'provider':fullString1, # provider
+            'tv_link':fullString2 # tv_link
+        }
 
     return dictionary # titel, provider, tv_link
         # print('{} {}'.format(film['titel'], str(film['zender'])))
