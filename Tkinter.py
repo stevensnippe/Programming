@@ -383,9 +383,6 @@ def providerscreen():
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
-    dictperregel = {
-
-    }
     # print(filmnamen)  # print de dictionaries met alle filmnamen
     rij = 0
 
