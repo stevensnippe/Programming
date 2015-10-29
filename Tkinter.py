@@ -348,10 +348,10 @@ def providerscreen():
     print(filmnamen)  # print de list met alle filmnamen
     rij = 0
 
-    for i in filmnamen:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
+    for i in filmnamen['titel']:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
         lb = tk.Button(provscreen, text=i, bg=background, fg=textkleur, activeforeground=activeforegroundbutton,
                        activebackground=activebackgroundbutton,
-                       width=len(max(filmnamen, key=len)), command=lambda piet=i: huurdersfilm(piet))
+                       width=len(max(filmnamen['titel'], key=len)), command=lambda piet=i: huurdersfilm(piet))
         button[i] = lb
     # button[i].grid(row=rij, column=0)
 
