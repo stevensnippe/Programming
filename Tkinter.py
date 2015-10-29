@@ -24,6 +24,9 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 
 def filmscreen():
+    """"
+
+    """"
     global filmwindow
     filmwindow = tkinter.Tk()
     filmwindow.geometry("300x500")
@@ -40,7 +43,7 @@ def filmscreen():
     rij = 0
 
     for i in filmnamen:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
-        lb = tk.Button(filmwindow, text=i + " (bekijk inhoud)", bg=background, activeforeground=activeforegroundbutton,
+        lb = tk.Button(filmwindow, text=(i + " (bekijk inhoud)"), bg=background, activeforeground=activeforegroundbutton,
                        activebackground=activebackgroundbutton,
                        fg=textkleur, width=17 + len(max(filmnamen, key=len)),
                        command=lambda piet=i: filmdescription(piet))
@@ -48,7 +51,7 @@ def filmscreen():
         # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         button[i].grid(row=rij, column=0)
 
-        lb2 = tk.Button(filmwindow, text=i + " Huren", bg=background, activeforeground=activeforegroundbutton,
+        lb2 = tk.Button(filmwindow, text=(i + " Huren"), bg=background, activeforeground=activeforegroundbutton,
                         activebackground=activebackgroundbutton,
                         fg=textkleur, width=7 + len(max(filmnamen, key=len)), command=lambda piet=i: filmdescription(piet))
         buttonkopen[i] = lb2
