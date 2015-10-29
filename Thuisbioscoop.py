@@ -8,6 +8,8 @@ import uuid     # genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420)
 import csv      # CSV bestand om unieke codes in op te slaan
 # import Tkinter  # Importeert Tkinter.py (GUI)
 loginPogingen = 5
+global gebruiker
+gebruiker = ""
 
 
 # Aan de parameter key geeft je de eigen unieke API sleutel mee.
@@ -95,6 +97,8 @@ def login(lg, pw):
     if lg in colum0:
         if pw == userLogins[lg]:
             accesGranted = True
+            global gebruiker
+            gebruiker = lg
             msg = ("Login succesful.")
             print(msg)
         else:
@@ -177,7 +181,7 @@ def print_filmnamen(film_dict):
         # print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
 
-def kaartjeKopen(provider, film, username): #code moet uit generateCode komen
+def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
 # def uuidNaarDb(code):
     """Zet unieke code uit generateCode() in database.csv"""
     try:
@@ -188,7 +192,7 @@ def kaartjeKopen(provider, film, username): #code moet uit generateCode komen
         w.close()
         f = open('database.csv', 'a', newline = '')
         writer = csv.writer(f, delimiter = ',')
-    writer.writerow((provider, film, username, generateCode()))
+    writer.writerow((provider, film, username, code))
     # writer.writerow((code,))
     print("TEST - unieke code code aangemaakt")
     f.close()
