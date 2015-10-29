@@ -3,6 +3,7 @@ import tkinter.ttk
 import tkinter.messagebox
 import Thuisbioscoop as TB
 import time
+import webbrowser
 # import animateGifs as aG
 # from PIL import ImageTk, Image
 g = 0
@@ -38,14 +39,15 @@ def filmscreen():
     buttonkopen = {}
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
+    global filmnamen
     filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
     print(filmnamen)  # print de list met alle filmnamen
     rij = 0
 
-    for i in filmnamen:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
+    for i in filmnamen["titel"]:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
         lb = tk.Button(filmwindow, text=(i + " (bekijk inhoud)"), bg=background, activeforeground=activeforegroundbutton,
                        activebackground=activebackgroundbutton,
-                       fg=textkleur, width=17 + len(max(filmnamen, key=len)),
+                       fg=textkleur, width=17 + len(max(filmnamen["titel"], key=len)),
                        command=lambda piet=i: filmdescription(piet))
         button[i] = lb
         # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
@@ -53,7 +55,7 @@ def filmscreen():
 
         lb2 = tk.Button(filmwindow, text=(i + " Huren"), bg=background, activeforeground=activeforegroundbutton,
                         activebackground=activebackgroundbutton,
-                        fg=textkleur, width=7 + len(max(filmnamen, key=len)), command=lambda piet=i: filmdescription(piet))
+                        fg=textkleur, width=7 + len(max(filmnamen["titel"], key=len)), command=lambda piet=i: filmdescription(piet))
         buttonkopen[i] = lb2
         # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         buttonkopen[i].grid(row=rij, column=1)
@@ -72,7 +74,10 @@ def filmscreen():
 
 
 def filmdescription(film):
-    print("hoi " + str(film))
+    filmnummer = filmnamen["titel"].index(film)
+    webbrowser.open(str(filmnamen["titel"][filmnummer]))
+    print(str(filmnamen["tv_link"][filmnummer]))
+    print("hoi " + str(filmnummer))
 
 
 def login():
