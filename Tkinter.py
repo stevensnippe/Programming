@@ -82,11 +82,12 @@ def filmdescription(film):
 
 def filmhuren(film):
     # for i in filmnamen['titel']:
-        filmnummer = filmnamen["titel"].index(film)
-        t = (str(filmnamen["titel"][filmnummer]))
-        p = (str(filmnamen["provider"][filmnummer]))
-        print(TB.gebruiker)
-        TB.kaartjeKopen(p, t, TB.gebruiker, TB.generateCode())
+    filmnummer = filmnamen["titel"].index(film)
+    t = (str(filmnamen["titel"][filmnummer]))
+    p = (str(filmnamen["provider"][filmnummer]))
+    print(TB.gebruiker)
+    TB.kaartjeKopen(p, t, TB.gebruiker, TB.generateCode())
+    tk.messagebox.showinfo(film + " huren", "U heeft zojuist de film: " + film + " gehuurd.")
 
 
 
