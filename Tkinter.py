@@ -362,7 +362,7 @@ def providerscreen():
             t = (str(filmnamen["titel"][filmnummer]))
             p = (str(filmnamen["provider"][filmnummer]))
             print(TB.gebruiker)
-            TB.kaartjeKopen(p, t, TB.gebruiker)
+            TB.kaartjeKopen(p, t, TB.gebruiker, TB.generateCode())
 
 
 
