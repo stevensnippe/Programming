@@ -215,9 +215,10 @@ def newuser():
     combostyle.theme_create('regular', parent='alt',
                          settings = {'TCombobox':
                                      {'configure':
-                                      {'selectbackground': activebackgroundbutton,
-                                       'fieldbackground': activebackgroundbutton,
-                                       'background': textkleur,
+                                      {'selectbackground': "white",
+                                       'fieldbackground': "white",
+                                       'background': "white",
+                                       "foreground": "black",
     #                                    TODO: textkleur moet zwart zijn
                                        }}}
                          )
