@@ -291,6 +291,8 @@ def newuser():
 
 def goback(a):
     if a == 1:
+        # combostyle.configure('red').clear()
+        # combostyle.configure('regular').clear()
         newuserwindow.eval('::ttk::CancelRepeat') # Bron: http://stackoverflow.com/questions/15448914/python-tkinter-ttk-combobox-throws-exception-on-quit
         newuserwindow.destroy()
         menu()
