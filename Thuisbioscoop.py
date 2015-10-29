@@ -154,17 +154,30 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
 def print_filmnamen(film_dict):
     """Print alle films met bijhorende zender"""
     fullString = []
+    fullString1 = []
+    fullString2 = []
     for film in film_dict['filmsoptv']['film']:
         s = (film['titel']) # de string
+        t = (film['zender'])
+        u = (film['ft_link'])
         b = escapeXML(s) # escapes(replaces) characters &amp etc and makes new string
+        c = escapeXML(t)
+        d = escapeXML(u)
         fullString.append(b)
-        # print(b)
-    return(fullString)
+        fullString1.append(c)
+        fullString2.append(d)
+        dictionary = {
+            'titel':fullString,
+            'provider':fullString1,
+            'tv_link':fullString2
+        } # titel, provider, tv_link
+
+    return dictionary # titel, provider, tv_link
         # print('{} {}'.format(film['titel'], str(film['zender'])))
         # print("Titel: "+film['titel']+" Zender:"+str(film['zender']))
 
 
-def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
+def kaartjeKopen(provider, film, username): #code moet uit generateCode komen
 # def uuidNaarDb(code):
     """Zet unieke code uit generateCode() in database.csv"""
     try:
@@ -175,9 +188,9 @@ def kaartjeKopen(provider, film, username, code): #code moet uit generateCode ko
         w.close()
         f = open('database.csv', 'a', newline = '')
         writer = csv.writer(f, delimiter = ',')
-    writer.writerow((provider, film, username, code))
+    writer.writerow((provider, film, username, generateCode()))
     # writer.writerow((code,))
-    print("TEST - unieke code code aangemaakt: "+code)
+    print("TEST - unieke code code aangemaakt")
     f.close()
 
 
@@ -245,9 +258,10 @@ def clearFile(file): # naam van file bv clearFile('kluis.csv')
 
 
 # clearFile #maakt gekozen file leeg
-# schrijf_xml(response) <
-# films_dict = verwerk_xml() <
+# schrijf_xml(response)
+# films_dict = verwerk_xml()
 # print_filmnamen(films_dict)
+# print(print_filmnamen(films_dict))
 
 # print("\n") #witregel voor overzicht
 # code = generateCode()
