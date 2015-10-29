@@ -30,7 +30,7 @@ def filmscreen():
     """
     global filmwindow
     filmwindow = tkinter.Tk()
-    filmwindow.geometry("300x500")
+    filmwindow.geometry("600x400")
     filmwindow.title("Chill-Flix")
     filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     filmwindow.configure(background=background)
@@ -82,11 +82,12 @@ def filmdescription(film):
 
 def filmhuren(film):
     # for i in filmnamen['titel']:
-        filmnummer = filmnamen["titel"].index(film)
-        t = (str(filmnamen["titel"][filmnummer]))
-        p = (str(filmnamen["provider"][filmnummer]))
-        print(TB.gebruiker)
-        TB.kaartjeKopen(p, t, TB.gebruiker, TB.generateCode())
+    filmnummer = filmnamen["titel"].index(film)
+    t = (str(filmnamen["titel"][filmnummer]))
+    p = (str(filmnamen["provider"][filmnummer]))
+    print(TB.gebruiker)
+    TB.kaartjeKopen(p, t, TB.gebruiker, TB.generateCode())
+    tk.messagebox.showinfo(film + " huren", "U heeft zojuist de film: " + film + " gehuurd.")
 
 
 
