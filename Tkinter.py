@@ -75,7 +75,7 @@ def filmscreen():
 
 def filmdescription(film):
     filmnummer = filmnamen["titel"].index(film)
-    webbrowser.open(str(filmnamen["titel"][filmnummer]))
+    webbrowser.open(str(filmnamen["tv_link"][filmnummer]))
     print(str(filmnamen["tv_link"][filmnummer]))
     print("hoi " + str(filmnummer))
 
@@ -215,9 +215,10 @@ def newuser():
     combostyle.theme_create('regular', parent='alt',
                          settings = {'TCombobox':
                                      {'configure':
-                                      {'selectbackground': activebackgroundbutton,
-                                       'fieldbackground': activebackgroundbutton,
-                                       'background': textkleur,
+                                      {'selectbackground': "white",
+                                       'fieldbackground': "white",
+                                       'background': "white",
+                                       "foreground": "black",
     #                                    TODO: textkleur moet zwart zijn
                                        }}}
                          )
