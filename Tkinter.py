@@ -30,7 +30,7 @@ def filmscreen():
     """
     global filmwindow
     filmwindow = tkinter.Tk()
-    filmwindow.geometry("300x500")
+    filmwindow.geometry("600x400")
     filmwindow.title("Chill-Flix")
     filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     filmwindow.configure(background=background)
