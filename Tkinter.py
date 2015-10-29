@@ -24,9 +24,9 @@ highlightbuttoncolorthingy = "#6B99A0"
 
 
 def filmscreen():
-    """"
+    """
 
-    """"
+    """
     global filmwindow
     filmwindow = tkinter.Tk()
     filmwindow.geometry("300x500")
