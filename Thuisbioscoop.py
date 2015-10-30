@@ -8,6 +8,7 @@ import uuid     # genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420)
 import csv      # CSV bestand om unieke codes in op te slaan
 # import Tkinter  # Importeert Tkinter.py (GUI)
 loginPogingen = 5
+aantalgebruikers = 0
 global gebruiker
 gebruiker = ""
 
@@ -268,11 +269,16 @@ def aanbiederInfo(filmnaamhier):
         reader = csv.reader(r, delimiter = ',')
 
     ingebruikdoor = []
+    amountofusers = 0
     for row in reader:
         if filmnaamhier == (row[1]):
             ingebruikdoor.append(row[2])
+            amountofusers += 1
         continue
-    print("DEBUG - ingebruik door: "+str(ingebruikdoor))
+    print("DEBUG - in gebruik door: "+str(ingebruikdoor))
+    global aantalgebruikers
+    aantalgebruikers = amountofusers
+    # print(str(aantalgebruikers))
     r.close()
     return ingebruikdoor
 
