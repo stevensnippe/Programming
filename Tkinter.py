@@ -93,15 +93,9 @@ def filmkijken():
         button[i] = lb
         button[i].pack()
 
-
-
-
-    # lcodecheck = tk.Label(bioscoop,text="Voer hier uw code in", bg=background, fg=textkleur)
-    # codecheck = tk.Entry(bioscoop)
-    # bcodecheck = tk.Button(bioscoop, text="Film kijken", bg=background, fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
-    # lcodecheck.pack()
-    # codecheck.pack()
-    # bcodecheck.pack()
+    bgoback = tk.Button(bioscoop, text="Go Back", command=lambda: bioscoop.destroy(), bg=background,
+                        fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
+    bgoback.pack(side="left")
 
     bioscoop.mainloop()
 
