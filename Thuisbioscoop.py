@@ -6,7 +6,7 @@ import codecs
 import xmltodict
 import uuid     # genereer unieke code (bv bb4e9665-24c2-43c4-892a-8a997958d420) - uuid.uuid4()
 import csv      # CSV bestand om unieke codes in op te slaan
-# import Tkinter  # Importeert Tkinter.py (GUI)
+# import Tkinter  # Importeert Tkinter.py (GUI.)
 loginPogingen = 5
 aantalgebruikers = 0
 global gebruiker
