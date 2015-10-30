@@ -260,6 +260,23 @@ def kaartjeKopen(provider, film, username, code): #code moet uit generateCode ko
     print("[DEBUG] Unieke code code aangemaakt in database: "+code)
     f.close()
 
+def userownedfilms(gebruiker):
+    """ returnt de films die een gebruiker momenteel heeft """
+    try:
+        r = open('database.csv', 'r')
+        reader = csv.reader(r, delimiter = ',')
+    except FileNotFoundError:
+        w = open('database.csv', 'w', newline='')
+        w.close()
+        r = open('database.csv', 'r')
+        reader = csv.reader(r, delimiter = ',')
+    ownedfilms = []
+    for row in reader:
+        for colum in reader:
+            if colum[2] == gebruiker:
+                ownedfilms.append(colum[1])
+    return ownedfilms
+
 
 def generateCode():
     """Genereert een unieke code op basis van uuid4 en returnt deze, failsafe als code bestaat"""

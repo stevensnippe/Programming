@@ -83,7 +83,7 @@ def filmkijken():
     bioscoop.title("Chill-Flix")
     bioscoop.wm_iconbitmap("favicon.ico")  # de logo van het programma
     bioscoop.configure(background=background)
-    availablefilms = ["test", "nog een"]
+    availablefilms = TB.userownedfilms(TB.gebruiker)
     button = {}
     for i in availablefilms:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
         lb = tk.Button(bioscoop, text=(i), bg=background, activeforeground=activeforegroundbutton,
@@ -93,15 +93,9 @@ def filmkijken():
         button[i] = lb
         button[i].pack()
 
-
-
-
-    # lcodecheck = tk.Label(bioscoop,text="Voer hier uw code in", bg=background, fg=textkleur)
-    # codecheck = tk.Entry(bioscoop)
-    # bcodecheck = tk.Button(bioscoop, text="Film kijken", bg=background, fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
-    # lcodecheck.pack()
-    # codecheck.pack()
-    # bcodecheck.pack()
+    bgoback = tk.Button(bioscoop, text="Go Back", command=lambda: bioscoop.destroy(), bg=background,
+                        fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
+    bgoback.pack(side="left")
 
     bioscoop.mainloop()
 
@@ -446,13 +440,13 @@ def providerfilms(providernaam):
     nummer = 0
     for i in filmnamen["provider"]:
         if i == providernaam:
-            print(nummer)
+            # print(nummer)
             list.append(nummer)
         nummer += 1
     for provider in list:
-        print(filmnamen["titel"][provider])
+        # print(filmnamen["titel"][provider])
         filmnamenlijst.append(filmnamen["titel"][provider])
-    print(filmnamen["provider"])
+    # print(filmnamen["provider"])
     return filmnamenlijst
 
 
