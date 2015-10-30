@@ -36,14 +36,12 @@ def filmscreen():
     filmwindow.title("Chill-Flix")  # http://stackoverflow.com/questions/2395431/using-tkinter-in-python-to-edit-the-title-bar
     filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     filmwindow.configure(background=background)
-    # names = ["kees", "philippe", "dylan"]
     button = {}
     buttonkopen = {}
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     global filmnamen
     filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
-    # print(filmnamen)  # print de list met alle filmnamen
     rij = 0
 
     for i in filmnamen["titel"]:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
@@ -142,7 +140,6 @@ def login(method):
             user = username.get()
             pw = password.get()
             accesgranted = TB.login2(user, pw)
-        # print(accesgranted)
         if accesgranted is True:
             TB.gebruiker = user
             # bron: http://stackoverflow.com/questions/10817917/how-to-disable-input-to-a-text-widget-but-allow-programatic-input
@@ -253,8 +250,6 @@ def newuser():
     newuserwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     newuserwindow.configure(background=background)
 
-    # g = tk.StringVar(g)
-
     lemail = tk.Label(newuserwindow, text="Email:", fg=textkleur, bg=background)
     global eemail
     eemail = tk.Entry(newuserwindow)
@@ -299,8 +294,6 @@ def newuser():
                                        }}}
                          )
 # ATTENTION: this applies the new style 'combostyle' to all ttk.Combobox
-#     combostyle.theme_use('combostyle')
-#     comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["nothing", "kpn", "ziggo", "fox", "xs4all"])
     combostyle.theme_use('regular')
     comboprovider = tk.ttk.Combobox(newuserwindow, style="TCombobox",values=["", "kpn", "ziggo", "fox", "xs4all"])
 
@@ -334,8 +327,6 @@ def goback(a):
     Dit scherm zorgt voor een juiste overschakeling van schermen
     """
     if a == 1:
-        # combostyle.configure('red').clear()
-        # combostyle.configure('regular').clear()
         newuserwindow.eval('::ttk::CancelRepeat') # Bron: http://stackoverflow.com/questions/15448914/python-tkinter-ttk-combobox-throws-exception-on-quit
         newuserwindow.destroy()
         menu()
@@ -472,7 +463,6 @@ def providerscreen():
     TB.films_dict = TB.verwerk_xml()
     filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
     afmeting = correctwindowsize(1)
-    # print(str(aantal))
     # print(filmnamen)  # print de dictionaries met alle filmnamen
 
     global provscreen
@@ -528,5 +518,5 @@ def huurdersfilm(film):
     bgoback.pack()
 
     useroverzicht.mainloop()
-    # tk.messagebox.showinfo(film, film + ":\n" + "")  # TODO: de users van de bijbehorende film als tekst laten zien
+    # TODO: de users van de bijbehorende film als tekst laten zien
 menu()
