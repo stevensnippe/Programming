@@ -89,7 +89,7 @@ def filmkijken():
         lb = tk.Button(bioscoop, text=(i), bg=background, activeforeground=activeforegroundbutton,
                        activebackground=activebackgroundbutton,
                        fg=textkleur, width=17 + len(max(availablefilms, key=len)),
-                       command=lambda piet=i: tk.messagebox.showinfo(piet, "u kunt nu de film: " + piet + " kijken"))
+                       command=lambda piet=i: tk.messagebox.showinfo(piet, "u kunt nu de film: " + piet + " kijken") and bioscoop.destroy())
         button[i] = lb
         button[i].pack()
 
