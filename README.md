@@ -30,3 +30,6 @@ Aub geen veranderingen aanbrengen in .idea en .gitignore om ellende te voorkomen
 
     # github link:
         * https://github.com/stevensnippe/Programming
+
+    # BELANGRIJK:
+	* de doctest werkt alleen op de huidige datum van inleveren, ivm afhankelijkheid
