@@ -25,6 +25,7 @@ response = requests.get('http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='+key
 
 def schrijf_xml(reponse):
     """Schrijft de response in films.xml
+    --- bron: info uit slides
     geen failsafe bij openen want w dus word aangemaakt indien niet aanwezig"""
     bestand = codecs.open('films.xml', "w", "iso-8859-1")
     bestand.write(str(response.text))
@@ -32,7 +33,9 @@ def schrijf_xml(reponse):
 
 
 def verwerk_xml():
-    """Niet zeker van het nut van deze functie, laat staan later naar kijken"""
+    """Niet zeker van het nut van deze functie, laat staan later naar kijken
+    --- bron: info uit slides
+    """
     bestand = open('films.xml', 'r')
     xml_string = bestand.read()
     bestand.close()
@@ -113,6 +116,23 @@ def login(lg, pw):
         print(msg)
     return accesGranted
 
+def preparelogin2():
+    """format login2 omdat we deze later liever opnieuw aanmaken"""
+    schrijf_xml(response)
+    films_dict = verwerk_xml()
+    global providernamen
+    providernamen = print_filmnamen(films_dict)
+    w = open('login2.csv', 'w', newline='')
+    writer = csv.writer(w, delimiter = ',')
+    writer.writerow( ("Username", "Password", "Email", "Provider", "Gender") )
+    for i in providernamen['provider']:
+        writer.writerow( (i, i+"pass", "test@.", i, "NA") )
+
+    w.close()
+
+
+
+
 def login2(lg, pw):
     """Extract de contents van login.csv naar een dictionary en 2 tuples,
     dit is makkelijk voor het verder werken met de data - indien
@@ -121,7 +141,7 @@ def login2(lg, pw):
     films_dict = verwerk_xml()
     global providernamen
     providernamen = print_filmnamen(films_dict)
-    print(providernamen["provider"])
+    # print(providernamen["provider"])
     try:
         r = open('login2.csv', 'r')
     except FileNotFoundError:
@@ -244,7 +264,6 @@ def print_filmnamen(film_dict):
 
 
 def kaartjeKopen(provider, film, username, code): #code moet uit generateCode komen
-# def uuidNaarDb(code):
     """Zet unieke code uit generateCode() in database.csv + failsafe indien
     database.csv niet bestaat."""
     try:

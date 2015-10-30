@@ -22,6 +22,7 @@ global activeforegroundbutton
 activeforegroundbutton = "#48ABAA"
 global highlightbuttoncolorthingy
 highlightbuttoncolorthingy = "#6B99A0"
+TB.preparelogin2()
 
 
 def filmscreen():
@@ -112,6 +113,7 @@ def filmdescription(film):
 
 
 def filmhuren(film):
+    """geeft popup als je een film huurd"""
     # for i in filmnamen['titel']:  # niet gebruiken, zorgt voor een unieke code
     filmnummer = filmnamen["titel"].index(film)
     t = (str(filmnamen["titel"][filmnummer]))
@@ -409,6 +411,7 @@ def menu():
     window.mainloop()
 
 def correctwindowsize(input):
+    """Returnt een window size gebaseerd op berekeningen ivm grote van elementen"""
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
@@ -431,6 +434,7 @@ def correctwindowsize(input):
     return afmeting
 
 def providerfilms(providernaam):
+    """returnt een lijst met alle films die een gebruiker in bezit heeft"""
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     global filmnamen
