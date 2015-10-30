@@ -199,7 +199,7 @@ def kaartjeKopen(provider, film, username, code): #code moet uit generateCode ko
         writer = csv.writer(f, delimiter = ',')
     writer.writerow((provider, film, username, code))
     # writer.writerow((code,))
-    print("[DEBUG] TEST - unieke code code aangemaakt: "+code)
+    print("[DEBUG] Unieke code code aangemaakt in database: "+code)
     f.close()
 
 
