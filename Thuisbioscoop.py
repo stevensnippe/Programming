@@ -275,7 +275,7 @@ def aanbiederInfo(filmnaamhier):
             ingebruikdoor.append(row[2])
             amountofusers += 1
         continue
-    print("DEBUG - in gebruik door: "+str(ingebruikdoor))
+    print("[DEBUG] - in gebruik door: "+str(ingebruikdoor))
     global aantalgebruikers
     aantalgebruikers = amountofusers
     # print(str(aantalgebruikers))

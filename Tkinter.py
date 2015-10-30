@@ -174,7 +174,7 @@ def createaccount():
     if ingebruik is False:
         readytowrite = True
 
-    if (("." or "@") not in email) or ("," in email): # or (len(pw) < 5):
+    if ("." not in email) or ("@" not in email) or ("," in email): # or (len(pw) < 5):
         eemail['bg'] = "red"
         readytowrite = False
 
@@ -194,7 +194,7 @@ def createaccount():
     if ingebruik is False and readytowrite is True:
         TB.createLogin(user, pw, email, provider, gender, True)  # True dus schrijven naar login.csv
         ingebruik = True
-        print("DEBUG: Account created - gender: "+str(gender))
+        print("[DEBUG]: Account created - gender: "+str(gender))
         goback(1)
         # print("test"+radiogender1.selection_get())
         # TODO: maak redirect window naar login + errors uit goback(1) halen
