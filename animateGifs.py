@@ -3,7 +3,7 @@ from Tkinter import *
 import time
 import os
 
-# Bron: https://www.youtube.com/watch?v=IeYHqn5LFmM
+# bron: https://www.youtube.com/watch?v=IeYHqn5LFmM
 class Application(Frame):
     def __init__(self, parent):
         Frame.__init__(self,parent)
