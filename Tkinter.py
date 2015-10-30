@@ -4,6 +4,8 @@ import tkinter.messagebox
 import Thuisbioscoop as TB
 import time
 import webbrowser
+import doctest
+doctest.testmod()
 g = 0
 tk = tkinter
 global background
@@ -430,6 +432,17 @@ def correctwindowsize(input):
 def providerfilms(providernaam):
     """
     returnt een lijst met alle films die een gebruiker in bezit heeft
+    de doctest werkt alleen op 30-10-2015 omdat de uitslagen afhankelijk zijn van de datum
+    >>> providerfilms("RTL8")
+    ['Penthouse North', 'Black Forest']
+    >>> providerfilms("SBS9")
+    ['Observe and Report', 'Beerfest']
+    >>> providerfilms("BBC1")
+    ['Hollywood Homicide']
+    >>> providerfilms("FOX")
+    ['The Frighteners']
+    >>> providerfilms("CANVAS")
+    []
     """
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
