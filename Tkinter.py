@@ -380,7 +380,7 @@ def menu():
                         activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
                         highlightcolor=highlightbuttoncolorthingy, command=(lambda: login(1)))
     global attemptsLeft
-    attemptsLeft = tk.Label(window, text="Attempts left: 5", fg="white", bg=background)
+    attemptsLeft = tk.Label(window, text="Attempts left: "+str(TB.loginPogingen), fg="white", bg=background)
     global warning
     warning = tk.Label(window, text="", fg="red", bg=background)
     global bsignup
