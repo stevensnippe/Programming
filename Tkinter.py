@@ -4,8 +4,6 @@ import tkinter.messagebox
 import Thuisbioscoop as TB
 import time
 import webbrowser
-# import animateGifs as aG
-# from PIL import ImageTk, Image
 g = 0
 tk = tkinter
 global background
