@@ -113,6 +113,62 @@ def login(lg, pw):
         print(msg)
     return accesGranted
 
+def login2(lg, pw):
+    """Extract de contents van login.csv naar een dictionary en 2 tuples,
+    dit is makkelijk voor het verder werken met de data - indien
+    meer tijd over herschrijven naar efficientere methode"""
+    schrijf_xml(response)
+    films_dict = verwerk_xml()
+    global providernamen
+    providernamen = print_filmnamen(films_dict)
+    print(providernamen["provider"])
+    try:
+        r = open('login2.csv', 'r')
+    except FileNotFoundError:
+        w = open('login2.csv', 'w', newline='')
+        writer = csv.writer(w, delimiter = ',')
+        writer.writerow( ("Username", "Password", "Email", "Provider", "Gender") )
+        for i in providernamen['provider']:
+            writer.writerow( (i, i+"pass", "test@.", i, "NA") )
+
+        w.close()
+        r = open('login2.csv', 'r')
+
+    userLogins = {
+
+    }
+    reader = csv.reader(r, delimiter = ',')
+    colum0 = [] # user
+    colum1 = [] # pw
+    for row in reader:
+        for colum in reader:
+            colum0.append(colum[0])
+            colum1.append(colum[1])
+            continue
+        continue
+    r.close()
+
+    for i in range(len(colum0)):
+        userLogins[colum0[i]] = colum1[i]
+    # print(userLogins) # print hele dictionary voor test purpose
+    # accesGranted = False # variable not used
+    if lg in colum0:
+        if pw == userLogins[lg]:
+            accesGranted = True
+            global gebruiker
+            gebruiker = lg
+            msg = ("[DEBUG] Login succesful.")
+            print(msg)
+        else:
+            accesGranted = False
+            msg = ("[DEBUG] Login failed, invalid password.")
+            print(msg)
+    else:
+        accesGranted = False
+        msg = ("[DEBUG] Login failed, invalid username.")
+        print(msg)
+    return accesGranted
+
 
 def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
     """Probeert username, password, email, provider en gender naar
@@ -154,6 +210,8 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
     f.close()
     r.close()
     return inUse
+
+
 
 
 def print_filmnamen(film_dict):
