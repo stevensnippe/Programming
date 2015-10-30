@@ -131,6 +131,7 @@ def login():
     """
     checkt de login met de database
     """
+
     if TB.loginPogingen > 0:
         global user
         user = username.get().lower()
@@ -386,7 +387,7 @@ def menu():
     global baanvoerder
     baanvoerder = tk.Button(window, text="Provider", bg=activebackgroundbutton, fg=activeforegroundbutton,
                             activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
-                            highlightcolor=highlightbuttoncolorthingy, command=(lambda: providerscreen()))
+                            highlightcolor=highlightbuttoncolorthingy, command=(lambda: login(2)))
     bquit = tk.Button(window, text="Quit", bg=activebackgroundbutton, fg=activeforegroundbutton,
                       activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
                       highlightcolor=highlightbuttoncolorthingy,
