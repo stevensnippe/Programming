@@ -94,15 +94,20 @@ def filmhuren(film):
     tk.messagebox.showinfo(film + " huren", "U heeft zojuist de film: " + film + " gehuurd.")
 
 
-def login():
+def login(method):
     """
     checkt de login met de database
     """
     if TB.loginPogingen > 0:
         global user
-        user = username.get().lower()
-        pw = password.get()
-        accesgranted = TB.login(user, pw)
+        if method == 1:
+            user = username.get().lower()
+            pw = password.get()
+            accesgranted = TB.login(user, pw)
+        else:
+            user = username.get()
+            pw = password.get()
+            accesgranted = TB.login2(user, pw)
         # print(accesgranted)
         if accesgranted is True:
             TB.gebruiker = user
@@ -126,7 +131,10 @@ def login():
             w.pack()
             # time.sleep(2)
             # TODO: hier de code om naar het volgende scherm te gaan waar films worden gedisplayed (nieuwe def)
-            goback(2)  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
+            if method == 1:
+                goback(2)  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
+            else:
+                providerscreen()
             return True
         else:
             TB.loginPogingen -= 1
@@ -159,7 +167,7 @@ def createaccount():
     pw = epassword.get()
     email = eemail.get().lower()
     provider = comboprovider.get()
-    gender = "M"  # TODO: gender ophalen uit radiobutton
+    gender = "NA"  # TODO: gender ophalen uit radiobutton
 
     # velden resetten naar defaultcolor white
     ename['bg'] = "white"
@@ -340,7 +348,7 @@ def menu():
     global bsignin
     bsignin = tk.Button(window, text='Sign in', bg=activebackgroundbutton, fg=activeforegroundbutton,
                         activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
-                        highlightcolor=highlightbuttoncolorthingy, command=(lambda: login()))
+                        highlightcolor=highlightbuttoncolorthingy, command=(lambda: login(1)))
     global attemptsLeft
     attemptsLeft = tk.Label(window, text="Attempts left: 5", fg="white", bg=background)
     global warning
@@ -353,7 +361,7 @@ def menu():
     global baanvoerder
     baanvoerder = tk.Button(window, text="Provider", bg=activebackgroundbutton, fg=activeforegroundbutton,
                             activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
-                            highlightcolor=highlightbuttoncolorthingy, command=(lambda: providerscreen()))
+                            highlightcolor=highlightbuttoncolorthingy, command=(lambda: login(2)))
     bquit = tk.Button(window, text="Quit", bg=activebackgroundbutton, fg=activeforegroundbutton,
                       activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
                       highlightcolor=highlightbuttoncolorthingy,
@@ -380,7 +388,8 @@ def correctwindowsize(input):
     for i in filmnamen['titel']:
         aantal = aantal + 1
     if input == 1:
-        afmeting = ("310x"+str(40+26*aantal)) # 26 = approx 1 button, 40 = extra voor go back button
+        lengte = len(providerfilms(TB.gebruiker))
+        afmeting = ("310x"+str(40+26*lengte)) # 26 = approx 1 button, 40 = extra voor go back button
     elif input == 2:
         afmeting = ("600x"+str(40+26*aantal)) # 26 = approx 1 button, 40 = extra voor go back button
     elif input == 3:
@@ -392,6 +401,26 @@ def correctwindowsize(input):
     else:
         afmeting = ("310x300") # default afmeting
     return afmeting
+
+def providerfilms(providernaam):
+    TB.schrijf_xml(TB.response)
+    TB.films_dict = TB.verwerk_xml()
+    global filmnamen
+    filmnamen = TB.print_filmnamen(TB.films_dict)
+    list = []
+    filmnamenlijst = []
+    nummer = 0
+    for i in filmnamen["provider"]:
+        if i == providernaam:
+            print(nummer)
+            list.append(nummer)
+        nummer += 1
+    for provider in list:
+        print(filmnamen["titel"][provider])
+        filmnamenlijst.append(filmnamen["titel"][provider])
+    print(filmnamen["provider"])
+    return filmnamenlijst
+
 
 def providerscreen():
     """
@@ -415,12 +444,12 @@ def providerscreen():
 
     button = {}
     rij = 0
+    providernaam = TB.gebruiker
 
-
-    for i in filmnamen['titel']:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
+    for i in providerfilms(providernaam):  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
         lb = tk.Button(provscreen, text=i, bg=background, fg=textkleur, activeforeground=activeforegroundbutton,
                        activebackground=activebackgroundbutton,
-                       width=len(max(filmnamen['titel'], key=len)), command=lambda piet=i: huurdersfilm(piet))
+                       width=len(max(providerfilms(providernaam), key=len)), command=lambda piet=i: huurdersfilm(piet))
         button[i] = lb
     # button[i].grid(row=rij, column=0)
 
