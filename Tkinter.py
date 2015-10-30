@@ -71,7 +71,40 @@ def filmscreen():
                         fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
     bgoback.grid(row=(rij + 1), column=0)
 
+    bfilmkijken = tk.Button(filmwindow, text="Film kijken", command=lambda: filmkijken(), bg=background, fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
+    bfilmkijken.grid(row=(rij+1), column=1)
+
     filmwindow.mainloop()
+
+
+def filmkijken():
+    bioscoop = tk.Tk()
+    bioscoop.geometry("200x200")
+    bioscoop.title("Chill-Flix")
+    bioscoop.wm_iconbitmap("favicon.ico")  # de logo van het programma
+    bioscoop.configure(background=background)
+    availablefilms = ["test", "nog een"]
+    button = {}
+    for i in availablefilms:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
+        lb = tk.Button(bioscoop, text=(i), bg=background, activeforeground=activeforegroundbutton,
+                       activebackground=activebackgroundbutton,
+                       fg=textkleur, width=17 + len(max(availablefilms, key=len)),
+                       command=lambda piet=i: tk.messagebox.showinfo(piet, "u kunt nu de film: " + piet + " kijken"))
+        button[i] = lb
+        button[i].pack()
+
+
+
+
+    # lcodecheck = tk.Label(bioscoop,text="Voer hier uw code in", bg=background, fg=textkleur)
+    # codecheck = tk.Entry(bioscoop)
+    # bcodecheck = tk.Button(bioscoop, text="Film kijken", bg=background, fg=textkleur, activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton)
+    # lcodecheck.pack()
+    # codecheck.pack()
+    # bcodecheck.pack()
+
+    bioscoop.mainloop()
+
 
 
 def filmdescription(film):
@@ -98,6 +131,7 @@ def login(method):
     """
     checkt de login met de database
     """
+
     if TB.loginPogingen > 0:
         global user
         if method == 1:
@@ -477,7 +511,7 @@ def huurdersfilm(film):
     users = TB.aanbiederInfo(film)  # TODO: hier komen de users van de film
     userlabel = {}
     for i in users:
-        lb3 = tk.Label(useroverzicht, text=i, fg=textkleur, bg=background)
+        lb3 = tk.Label(useroverzicht, text=i, fg="#44FF66", bg=background)
         userlabel[i] = lb3
         userlabel[i].pack()
 
