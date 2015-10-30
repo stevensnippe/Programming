@@ -1,5 +1,5 @@
 Login succesful.
-[DEBUG] accesgranted was gelijk aan: True
+[DEBUG] accesgranted was gelijk aan: True.
 (['Die goldene Gans', '102 Dalmatians', 'Licence to Kill', 'The Greatest', 'U.S. Marshals', 'The Fighter', 'Des morceaux de moi', 'Mars Attacks!', "L'homme de l'ile Sandwich", 'Resident Evil: Extinction'], ['NPO3', 'NET5', 'RTL7', 'RTL8', 'Veronica', 'SBS9', 'TV5', 'NET5', 'TV5', 'RTL7'], ['http://www.filmtotaal.nl/film.php?id=26777', 'http://www.filmtotaal.nl/film.php?id=6751', 'http://www.filmtotaal.nl/film.php?id=522', 'http://www.filmtotaal.nl/film.php?id=20903', 'http://www.filmtotaal.nl/film.php?id=5005', 'http://www.filmtotaal.nl/film.php?id=18005', 'http://www.filmtotaal.nl/film.php?id=24488', 'http://www.filmtotaal.nl/film.php?id=2491', 'http://www.filmtotaal.nl/film.php?id=28256', 'http://www.filmtotaal.nl/film.php?id=13400'])
 Exception in Tkinter callback
 Traceback (most recent call last):
