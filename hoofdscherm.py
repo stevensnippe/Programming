@@ -27,7 +27,7 @@ def filmscreen():
     filmwindow = tkinter.Tk()
     filmwindow.geometry(windowsize)
     filmwindow.title("Chill-Flix")
-    filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
+    filmwindow.wm_iconbitmap("favicon.ico")  # het logo van het programma
     filmwindow.configure(background=background)
     names = ["kees", "philippe", "dylan"]
     button = {}
