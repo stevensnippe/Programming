@@ -79,6 +79,9 @@ def filmscreen():
 
 
 def filmkijken():
+    """
+    Dit scherm laat zien welke films er gehuurt zijn door de user, zodat ze deze kunnen bekijken
+    """
     bioscoop = tk.Tk()
     bioscoop.geometry("200x200")
     bioscoop.title("Chill-Flix")
@@ -330,6 +333,9 @@ def newuser():
 
 
 def goback(a):
+    """
+    Dit scherm zorgt voor een juiste overschakeling van schermen
+    """
     if a == 1:
         # combostyle.configure('red').clear()
         # combostyle.configure('regular').clear()
@@ -411,7 +417,9 @@ def menu():
     window.mainloop()
 
 def correctwindowsize(input):
-    """Returnt een window size gebaseerd op berekeningen ivm grote van elementen"""
+    """
+    Returnt een window size gebaseerd op berekeningen ivm grote van elementen
+    """
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
@@ -434,7 +442,9 @@ def correctwindowsize(input):
     return afmeting
 
 def providerfilms(providernaam):
-    """returnt een lijst met alle films die een gebruiker in bezit heeft"""
+    """
+    returnt een lijst met alle films die een gebruiker in bezit heeft
+    """
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     global filmnamen
@@ -456,7 +466,8 @@ def providerfilms(providernaam):
 
 def providerscreen():
     """
-
+    In dit scherm krijgen de providers de films te zien die zij zelf aanvoeren, als ze op een film drukken kunnen ze de
+    huurders zien
     """
     window.destroy()
     rommel.destroy()
@@ -496,6 +507,9 @@ def providerscreen():
 
 
 def huurdersfilm(film):
+    """
+    Hier worden de huurders van de films bekeken
+    """
     global mijnfilm
     mijnfilm = film
     afmeting = correctwindowsize(3)
