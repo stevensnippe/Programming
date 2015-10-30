@@ -33,7 +33,7 @@ def filmscreen():
     global filmwindow
     filmwindow = tkinter.Tk()
     filmwindow.geometry(afmeting)
-    filmwindow.title("Chill-Flix")
+    filmwindow.title("Chill-Flix")  # http://stackoverflow.com/questions/2395431/using-tkinter-in-python-to-edit-the-title-bar
     filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     filmwindow.configure(background=background)
     # names = ["kees", "philippe", "dylan"]
@@ -51,8 +51,8 @@ def filmscreen():
                        activebackground=activebackgroundbutton,
                        fg=textkleur, width=17 + len(max(filmnamen["titel"], key=len)),
                        command=lambda piet=i: filmdescription(piet))
+        # http://www.tutorialspoint.com/python/tk_button.htm    voor de button arguments
         button[i] = lb
-        # label[i].bind("<Button-1>",command=(lambda filmdescription("a")))   # http://stackoverflow.com/questions/11504571/clickable-tkinter-labels
         button[i].grid(row=rij, column=0)
 
         lb2 = tk.Button(filmwindow, text=(i + " Huren"), bg=background, activeforeground=activeforegroundbutton,
@@ -63,9 +63,8 @@ def filmscreen():
         buttonkopen[i].grid(row=rij, column=1)
         # voor de dynamische button breedte: http://stackoverflow.com/questions/873327/pythons-most-efficient-way-to-choose-longest-string-in-list
 
-    # for i in filmnamen:
-    #     buttonkopen[i].pack()  # TODO: een goede layout op het scherm krijgen (met .grid werkt column argument niet?)
-    #     button[i].pack()
+     # TODO: een goede layout op het scherm krijgen (met .grid werkt column argument niet?)
+
         rij += 1
 
     bgoback = tk.Button(filmwindow, text="Go Back", command=lambda: goback(3), bg=background,
@@ -79,6 +78,9 @@ def filmscreen():
 
 
 def filmkijken():
+    """
+    Dit scherm laat zien welke films er gehuurt zijn door de user, zodat ze deze kunnen bekijken
+    """
     bioscoop = tk.Tk()
     bioscoop.geometry("200x200")
     bioscoop.title("Chill-Flix")
@@ -106,6 +108,7 @@ def filmdescription(film):
     """
     zoekt bij een bepaalde titel de bijbehorende url en opent deze in de default browser
     """
+    # http://stackoverflow.com/questions/4302027/how-to-open-a-url-in-python
     filmnummer = filmnamen["titel"].index(film)
     webbrowser.open(str(filmnamen["tv_link"][filmnummer]))
     print("[DEBUG] "+str(filmnamen["tv_link"][filmnummer]))
@@ -113,8 +116,9 @@ def filmdescription(film):
 
 
 def filmhuren(film):
-    """geeft popup als je een film huurd"""
-    # for i in filmnamen['titel']:  # niet gebruiken, zorgt voor een unieke code
+    """
+    geeft popup als je een film huurd
+    """
     filmnummer = filmnamen["titel"].index(film)
     t = (str(filmnamen["titel"][filmnummer]))
     p = (str(filmnamen["provider"][filmnummer]))
@@ -159,7 +163,6 @@ def login(method):
             w = tk.Label(window, image=photo2, borderwidth="0")
             w.image = photo2
             w.pack()
-            # time.sleep(2)
             # TODO: hier de code om naar het volgende scherm te gaan waar films worden gedisplayed (nieuwe def)
             if method == 1:
                 goback(2)  # TODO: wanneer geactiveerd slaat hij de accesgranted screen over
@@ -178,9 +181,6 @@ def login(method):
                 bsignup.configure(state="disabled")
                 baanvoerder.configure(state="disabled")
                 photo.configure(file="blocked.gif")  # kan wel beter dan dit maar het idee is er
-                # username.after(1000,username.configure(state="normal"))  # voor extra tijd: zorgen dat na 5 minuten de inlog ook weer werkt
-                # password.after(1000,password.configure(state="normal"))
-                # bsignin.after(1000, bsignin.configure(state="normal"))
             return False
     else:
         warning['text'] = "Too many failed login attempts."
@@ -330,6 +330,9 @@ def newuser():
 
 
 def goback(a):
+    """
+    Dit scherm zorgt voor een juiste overschakeling van schermen
+    """
     if a == 1:
         # combostyle.configure('red').clear()
         # combostyle.configure('regular').clear()
@@ -411,7 +414,9 @@ def menu():
     window.mainloop()
 
 def correctwindowsize(input):
-    """Returnt een window size gebaseerd op berekeningen ivm grote van elementen"""
+    """
+    Returnt een window size gebaseerd op berekeningen ivm grote van elementen
+    """
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
@@ -434,7 +439,9 @@ def correctwindowsize(input):
     return afmeting
 
 def providerfilms(providernaam):
-    """returnt een lijst met alle films die een gebruiker in bezit heeft"""
+    """
+    returnt een lijst met alle films die een gebruiker in bezit heeft
+    """
     TB.schrijf_xml(TB.response)
     TB.films_dict = TB.verwerk_xml()
     global filmnamen
@@ -456,7 +463,8 @@ def providerfilms(providernaam):
 
 def providerscreen():
     """
-
+    In dit scherm krijgen de providers de films te zien die zij zelf aanvoeren, als ze op een film drukken kunnen ze de
+    huurders zien
     """
     window.destroy()
     rommel.destroy()
@@ -496,6 +504,9 @@ def providerscreen():
 
 
 def huurdersfilm(film):
+    """
+    Hier worden de huurders van de films bekeken
+    """
     global mijnfilm
     mijnfilm = film
     afmeting = correctwindowsize(3)
