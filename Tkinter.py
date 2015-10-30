@@ -133,17 +133,19 @@ def login():
             attemptsLeft['text'] = "Attempts left: "+str(TB.loginPogingen)
             warning['text'] = "Login failed, invalid username or password."
             if TB.loginPogingen == 0:
-                warning['text'] = "Too many failed login attempts - wait 5 minutes."
+                warning['text'] = "Too many failed login attempts."
                 username.configure(state="disabled")
                 password.configure(state="disabled")
                 bsignin.configure(state="disabled")
+                bsignup.configure(state="disabled")
+                baanvoerder.configure(state="disabled")
                 photo.configure(file="blocked.gif")  # kan wel beter dan dit maar het idee is er
                 # username.after(1000,username.configure(state="normal"))  # voor extra tijd: zorgen dat na 5 minuten de inlog ook weer werkt
                 # password.after(1000,password.configure(state="normal"))
                 # bsignin.after(1000, bsignin.configure(state="normal"))
             return False
     else:
-        warning['text'] = "Too many failed login attempts - wait 5 minutes."
+        warning['text'] = "Too many failed login attempts."
         return False
 
 
@@ -348,6 +350,7 @@ def menu():
                         activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
                         highlightcolor=highlightbuttoncolorthingy, command=(lambda: newuser()))
 
+    global baanvoerder
     baanvoerder = tk.Button(window, text="Provider", bg=activebackgroundbutton, fg=activeforegroundbutton,
                             activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
                             highlightcolor=highlightbuttoncolorthingy, command=(lambda: providerscreen()))
@@ -380,6 +383,12 @@ def correctwindowsize(input):
         afmeting = ("310x"+str(40+26*aantal)) # 26 = approx 1 button, 40 = extra voor go back button
     elif input == 2:
         afmeting = ("600x"+str(40+26*aantal)) # 26 = approx 1 button, 40 = extra voor go back button
+    elif input == 3:
+        TB.aanbiederInfo(mijnfilm)
+        if TB.aantalgebruikers < 30:
+            afmeting = ("310x"+str(22*(TB.aantalgebruikers+3))) # 26 = approx 1 button, 40 = extra voor go back button
+        else:
+            afmeting = ("310x1000")
     else:
         afmeting = ("310x300") # default afmeting
     return afmeting
@@ -423,14 +432,14 @@ def providerscreen():
     bgoback.pack(side="left")
     provscreen.mainloop()
 
-def makewindowsize(aantaltitels):
-
-    pass # 11.5 in window provider
 
 
 def huurdersfilm(film):
+    global mijnfilm
+    mijnfilm = film
+    afmeting = correctwindowsize(3)
     useroverzicht = tk.Tk()
-    useroverzicht.geometry("310x300")
+    useroverzicht.geometry(afmeting)
     useroverzicht.title("Chill-Flix")
     useroverzicht.wm_iconbitmap("favicon.ico")  # de logo van het programma
     useroverzicht.configure(background=background)
