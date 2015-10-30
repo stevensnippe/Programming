@@ -100,15 +100,15 @@ def login(lg, pw):
             accesGranted = True
             global gebruiker
             gebruiker = lg
-            msg = ("Login succesful.")
+            msg = ("[DEBUG] Login succesful.")
             print(msg)
         else:
             accesGranted = False
-            msg = ("Login failed, invalid password.")
+            msg = ("[DEBUG] Login failed, invalid password.")
             print(msg)
     else:
         accesGranted = False
-        msg = ("Login failed, invalid username.")
+        msg = ("[DEBUG] Login failed, invalid username.")
         print(msg)
     return accesGranted
 
@@ -137,7 +137,7 @@ def createLogin(nLg, nPw, nEmail, nProvider, nGender, write):
     for row in reader:
         # print(row[0]) # DEBUG: print alle usernames
         if nLg == (row[0]):
-            print("Gebruikersnaam bestaat al.")
+            print("[DEBUG] Gebruikersnaam bestaat al.")
             inUse = True
             break
         else:
@@ -198,7 +198,7 @@ def kaartjeKopen(provider, film, username, code): #code moet uit generateCode ko
         writer = csv.writer(f, delimiter = ',')
     writer.writerow((provider, film, username, code))
     # writer.writerow((code,))
-    print("TEST - unieke code code aangemaakt: "+code)
+    print("[DEBUG] TEST - unieke code code aangemaakt: "+code)
     f.close()
 
 
@@ -249,9 +249,9 @@ def codeInDb(code):
            continue
     r.close()
     if inDb == True:
-        print("De code komt voor in de database.")
+        print("[DEBUG] De code komt voor in de database.")
     else:
-        print("De code komt niet voor in de database.")
+        print("[DEBUG] De code komt niet voor in de database.")
     return inDb
 
 def aanbiederInfo(filmnaamhier):
@@ -280,7 +280,7 @@ def clearFile(file): # naam van file bv clearFile('kluis.csv')
     """Maakt de csv file leeg"""
     clear = open(file, 'w')
     clear.close()
-    print("De inhoud van "+str(file)+" is verwijdert.")
+    print("[DEBUG] De inhoud van "+str(file)+" is verwijdert.")
 
 
 # EINDE DEF FUNCTIES - START UITVOER (# omdat dit gebeurt in tkinter)

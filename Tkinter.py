@@ -28,9 +28,10 @@ def filmscreen():
     """
     Laat alle films zien d.m.v. dynamic buttons, hier kan je naar de site gaan of een film huren
     """
+    afmeting = correctwindowsize(2)
     global filmwindow
     filmwindow = tkinter.Tk()
-    filmwindow.geometry("600x400")
+    filmwindow.geometry(afmeting)
     filmwindow.title("Chill-Flix")
     filmwindow.wm_iconbitmap("favicon.ico")  # de logo van het programma
     filmwindow.configure(background=background)
@@ -41,7 +42,7 @@ def filmscreen():
     TB.films_dict = TB.verwerk_xml()
     global filmnamen
     filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
-    print(filmnamen)  # print de list met alle filmnamen
+    # print(filmnamen)  # print de list met alle filmnamen
     rij = 0
 
     for i in filmnamen["titel"]:  # http://stackoverflow.com/questions/7300041/tkinter-create-labels-and-entrys-dynamically
@@ -79,7 +80,7 @@ def filmdescription(film):
     """
     filmnummer = filmnamen["titel"].index(film)
     webbrowser.open(str(filmnamen["tv_link"][filmnummer]))
-    print(str(filmnamen["tv_link"][filmnummer]))
+    print("[DEBUG] "+str(filmnamen["tv_link"][filmnummer]))
     # print("hoi " + str(filmnummer))  # werd gebruikt om te testen of de index werkte
 
 
@@ -88,10 +89,9 @@ def filmhuren(film):
     filmnummer = filmnamen["titel"].index(film)
     t = (str(filmnamen["titel"][filmnummer]))
     p = (str(filmnamen["provider"][filmnummer]))
-    print(TB.gebruiker)
+    print("[DEBUG] gebruiker = "+TB.gebruiker)
     TB.kaartjeKopen(p, t, TB.gebruiker, TB.generateCode())
     tk.messagebox.showinfo(film + " huren", "U heeft zojuist de film: " + film + " gehuurd.")
-
 
 
 def login():
@@ -167,12 +167,12 @@ def createaccount():
 
     ingebruik = TB.createLogin(user, pw, email, provider, gender, False)
     # ^SCHRIJFT NIET -- laatste parameter geeft aan alleen data ophalen
-    print("login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(ingebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
+    print("[DEBUG] login: "+user+"\n", "pw: "+pw+"\n", "email: "+email+"\n", "provider: "+provider+"\n", "ingebruik: "+str(ingebruik)) # , gender --- hoe haal ik info van radiobutton @Debug
 
     if ingebruik is False:
         readytowrite = True
 
-    if ("." and "@" not in email) or ("," in email): # or (len(pw) < 5):
+    if (("." or "@") not in email) or ("," in email): # or (len(pw) < 5):
         eemail['bg'] = "red"
         readytowrite = False
 
@@ -348,7 +348,7 @@ def menu():
                         activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
                         highlightcolor=highlightbuttoncolorthingy, command=(lambda: newuser()))
 
-    baanvoerder = tk.Button(window, text="Aanvoerder?", bg=activebackgroundbutton, fg=activeforegroundbutton,
+    baanvoerder = tk.Button(window, text="Provider", bg=activebackgroundbutton, fg=activeforegroundbutton,
                             activebackground=activebackgroundbutton, activeforeground=activeforegroundbutton,
                             highlightcolor=highlightbuttoncolorthingy, command=(lambda: providerscreen()))
     bquit = tk.Button(window, text="Quit", bg=activebackgroundbutton, fg=activeforegroundbutton,
@@ -369,6 +369,20 @@ def menu():
     bquit.pack(side="bottom")
     window.mainloop()
 
+def correctwindowsize(input):
+    TB.schrijf_xml(TB.response)
+    TB.films_dict = TB.verwerk_xml()
+    filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
+    aantal = 0
+    for i in filmnamen['titel']:
+        aantal = aantal + 1
+    if input == 1:
+        afmeting = ("310x"+str(40+26*aantal)) # 26 = approx 1 button, 40 = extra voor go back button
+    elif input == 2:
+        afmeting = ("600x"+str(40+26*aantal)) # 26 = approx 1 button, 40 = extra voor go back button
+    else:
+        afmeting = ("310x300") # default afmeting
+    return afmeting
 
 def providerscreen():
     """
@@ -376,18 +390,21 @@ def providerscreen():
     """
     window.destroy()
     rommel.destroy()
+    TB.schrijf_xml(TB.response)
+    TB.films_dict = TB.verwerk_xml()
+    filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
+    afmeting = correctwindowsize(1)
+    # print(str(aantal))
+    # print(filmnamen)  # print de dictionaries met alle filmnamen
+
     global provscreen
     provscreen = tk.Tk()
-    provscreen.geometry("310x300")
+    provscreen.geometry(afmeting)
     provscreen.title("Chill-Flix")
     provscreen.wm_iconbitmap("favicon.ico")  # de logo van het programma
     provscreen.configure(background=background)
 
     button = {}
-    TB.schrijf_xml(TB.response)
-    TB.films_dict = TB.verwerk_xml()
-    filmnamen = TB.print_filmnamen(TB.films_dict)  # filmnamen geeft alle huidige films in list
-    # print(filmnamen)  # print de dictionaries met alle filmnamen
     rij = 0
 
 
@@ -405,6 +422,10 @@ def providerscreen():
     bgoback = tk.Button(provscreen, text="Go Back", command=lambda: goback(4), bg=background, fg=textkleur, activeforeground=activeforegroundbutton, activebackground=activebackgroundbutton)
     bgoback.pack(side="left")
     provscreen.mainloop()
+
+def makewindowsize(aantaltitels):
+
+    pass # 11.5 in window provider
 
 
 def huurdersfilm(film):
